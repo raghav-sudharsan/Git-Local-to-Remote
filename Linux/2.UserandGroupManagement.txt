@@ -429,9 +429,181 @@ ulimit  -user limit
   
 
  
-22) 07/11   - Process Management
+23) 07/11   - Process Management
 ========================================================================
+ 
+ Booting process
+ ----------------
+  bios / uefi
+  bootloader
+  copy the kernal to load in memory
+  kernal initialize the os and create first process is called 
+   init or systemd  [Modern OS ]
+   pid of systemd is always 1 
+   
+ pstree     # 1st process - systemd
+ pstree -p
+ pidof systemd   #pi -print the process id
+ ps- fp 2320
+ ps -e | grep systemd   #-e  - everything
+ systemctl --user status
+ ps -lf          #-lf long list full format
+   #F    - flask
+    S    - process state
+    UID
+    PID
+    c    - CPU process utilization
+	PRI - Priority
+	Ni  - Nize value
+    ADDR - Memory address
+	SZ   No.of pages
+	WChan - Kernal related status
+	ps -ef
 
+    ps -u ec2-user                 #to view the process are attached to the particular user
+    ps -eo comm,pcpu,pmem | head   #ps -eo -everything output commands,process CPU,
+	pstree 
+	ps -eo comm,pcpu --sort -pcpu | head
+	
+	ps -C ps -o pid=2830     #to view process ids are associate with ps
+	ps -C ps -o pid=
+	ps -C bash -o pid=
+	
+	ps -eo pid,cmd e | tail -n 3   #e - environment variable
+	
+	
+ Need to see:
+  userid?
+  effectiveID?
+  id?
+    
+
+24) 10/1125
+========================
+ last class:
+  what is process
+ what is program
+ diff between process and program
+ what is scheduler
+ what are the diff process states
+ what are the diff types of processes:
+  zombie
+  orphan
+  daemon process
+ what is process control table
+
+what is the initd or system process
+pstree command 
+
+pidof command
+how to view the process usinf ps with various arguments
+
+running instance of a program
+==============================
+ own memory, cpu contex, file description, environments and system resource.
+ 
+ ls --> create the process from -> /bin/ls
+  pid,ppid
+  
+  
+what happened when process is created
+----------------------------------------  
+
+ 1. parent process request a new process - fork
+    ps
+	bash is the parent process for every commands
+	
+ 2. Every process request new process
+    
+	kernal -> pcb ->#pcb contains - pid,process state, pc, cpu, register memory mappring,   #pcb - process control block
+	
+ 3. Kernal duplicate the parent resources
+    
+	copy-on-write--cow  -> copy the file descripter
+	
+	New process Request
+	 pid -> ppid -> kernal -> # kernal will create memory pages
+	
+	One tryse to modify the copy process will create
+	
+ 4. both parent and child will resume
+	
+	
+ 
+ 
+ 
+ ls       # every command process, process id will create
+ echo $$  #print the current process id
+ ls
+ echo $$  #another process id will create
+ 
+ 
+strace - system call how internally communication, it will perform deep scan.
+--------------------------------------------------------------------------------
+ type strace
+ man strace
+ 
+ echo $?  #to see executed command state
+  0       #0 - success
+  
+ sudo yum insatll -y docker
+ sudo systemctl strat docker
+ pgrep dockerd               #we can able to see pid with pname
+ sudo strace -f 28179        # cannot find ....
+ sudo strace -f dockerd
+ 
+ ps -ef | wc -1         #wc - word count
+ ps -ef | grep dockerd
+ 
+ man kill
+ kill -l
+ kill -l | grep sig
+ 
+slepp:
+---------
+
+ man sleep 
+ sleep 10000&        # to set a sleep time for a specific process, 10000& - sleep, it will run in background
+ sleep 20000&         # 20000& - sleep time
+ sleep 20000&         # total three process will create 
+ ps
+ jobs -l            #list the background sleeping process
+ fg 3               #foreground 3rd process
+ sleep 30000&       
+ fg 3 
+    #ctrl z - will stop the current fg process and exit
+	#ctrl c - exit
+	
+ kill %3         # kill process with job id
+ jobs -l
+ kill 28755      #kill with process id
+ jobs -l
+ pkill sleep     #kill with process name 
+ jobs -l 
+ 
+ sleep 10000&
+ sleep 20000&
+ sleep 30000&
+ killall sleep    #it will kill all the process with process id
+ 
+ sudo kill -9 1   #force kill with job id, kill -9 with job id
+ top
+ slepp 20000&
+ ps
+ kill -9 28920    #kill -9 - pause the signal in the intenal
+ ps
+ 
+ ps --forest      #display the process in the tree format
+ ps --no-headers
+ ps
+ 
+ 
+ 
+ 
+ 
+
+	
+ 
 
  
  
