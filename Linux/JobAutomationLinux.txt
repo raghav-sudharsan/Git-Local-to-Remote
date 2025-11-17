@@ -1,0 +1,142 @@
+17/11: Job Automation in Linux:
+================================
+Covered topics
+---------------
+File System Module
+user management
+group management
+process management
+text processing utilities
+jobautomation
+general commands
+
+I
+==============================
+
+
+Job Automation:
+==============
+to run script
+to run some playbooks
+to run some kind of jobs In k8s
+to run schedule jobs in Jenkins
+job scheduling: execution of specific command//script
+
+could be one time(low system usage ) or
+recurring based on -predetermined time in the feature
+
+CI ---- Pull based mechanism:executing an automated build at scheduled
+time
+
+
+tools
+--------
+ daemons --background process
+ 
+ 1. atd
+ 2. crond
+ 3. systemd tiimers
+ 
+ atd: -at time deamon
+ ---------------------
+  at time - one time execution in the feature
+   at 9:pm backscript.sh    - relook the execution next day 
+   
+ crond:
+ ------
+  /var/spool/cron
+  /etc/cron.d 
+  
+   at 9:pm backscript.sh    - No relook the execution next day 
+  
+ controlling user access:
+ -------------------------
+ allow & deny   - /etc/directory
+ 
+ at -> at.allow, at.deny
+ cron -> cron.allow, cron.deny
+ 
+Schedular
+-----------
+ /var/log/cron file
+ 
+ 
+Scheduling jobs with at command:
+---------------------------------
+ /var/spool/at   - save location
+ at
+ atq
+ atrm
+ 
+ syntax:
+ -------
+ syn: at 1:20 am
+       at noon --12am
+	   at 12:50
+	  at midnight --12 am
+     at now + 5 hrs
+    at 3:00 1/1/2026 command
+    at 3:00 1/1/2026 -f /path of script file
+    at -f /home/ec2-user/scripts.sh now 3 hrs
+
+install the at if it is missed:
+------------------------------
+yum install -y at
+
+ at 11:10 am tomorrow
+ atq
+ 
+ sudo ls /var/spool/at   #job id
+ atq
+ at -d 5    #remove target job with id
+ atq
+ atrm 1     #at remove with job id
+ 
+ atq | awk '{print $1}' | xargs -r atrm
+ atq
+ 
+ 
+ to run specif jobs when the system load become low:
+ ---------------------------------------------------
+ 
+batch: is a command to run the job when the system load is low
+     : system decide the best time to run the script
+	 
+	  
+echo "hello , welcome to job automation in linux " > /tmp/output. txt
+batch
+ at> echo "please execute jobs at $ (date) "
+ at> /tmp/output.txt
+
+
+CPU-intensive tasks - batch
+=============================
+crond:
+
+crontab:
+ cron table  #time table
+ 
+ vi /etc/crontab
+ 
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * user-name command to be executed
+
+
+ yum installed | grep cron
+ 
+ 
+ crontab expression
+ ---------------------
+ to run the script everyday at 5:30 am  - 30 5 * * *
+ to run the script everyday at 11pm every day - 
+ 
+
+ 
+ 
+ 
