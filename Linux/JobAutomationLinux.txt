@@ -138,5 +138,90 @@ crontab:
  
 
  
+18/11/25: Service management in linux
+=======================================
+
+What  is service:
+ these are the background program /tasks
  
+ sshd--handles ssh login
+  dockerd
+ webserver--nginix
+ 
+ systemd
+ 
+ what is service management
+ ----------------------------
+  controlling the life cycle of background service
+   start service 
+   stop service
+   restart service 
+   reload configuration
+   enable/disable auto-restart at boot
+   checks the logs and status
+   
+   systemd - systemctl
+   
+   what is the diff between process and services
+   --------------------------------------------
+    sevice- 
+	
+	auto-start at boot --- yes
+     unit file
+    each service is a process
+ not every process is a service
+
+ Nginix
+ -------  
+ socket: protocol://ipaddress:port
+ 80
+ security groups - inbound/outbound
+ 
+ which nginix 
+ whereis nginix
+ whatis 
+ 
+ 
+ 
+ 
+ sudo yum install -y nginix
+ sudo systemctl start nginix
+ sudo systemctl stop nginix
+ sudo systemctl status nginix
+ sudo systemctl edit nginix
+ " reload        # if any changes made in nginixconfigurations , must reload
+ 
+ man ln
+ sudo systemctl list-units --type=service
+ sudo systemctl list-units --type=service | wc -l
+ sudo systemctl list-units --type=service | grep "nginix"
+ 
+ sudo systemctl is-active nginix   
+ sudo systemctl is-enabled nginix
+ 
+ which nginix 
+ whereis nginix
+ whatis 
+ 
+ cd ~
+ cd /etc/nginix
+ 
+ mask/unmask
+ -----------
+  man systemctl
+  cd
+  sudo systemctl mask nginix
+  sudo systemctl status nginix
+  " stop
+  systemctl start nginix   # we cant start
+  " unmask
+  " start nginix 
+  journalctl -u nginix
+  
+ 
+  
+  
+  
+ 
+
  
