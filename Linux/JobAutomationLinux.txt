@@ -218,10 +218,90 @@ What  is service:
   " start nginix 
   journalctl -u nginix
   
- 
   
-  
-  
- 
+19/11/25 - Package-Management
+==============================
+yum - yellowdog update modifire, high level repo  
+rpm - red hat package management, low level repo
 
+
+ What is software:
+  tools
+  os
+  db
+  application
+
+What is Software management in linux:
+--------------------------------------
+ package
+ install
+ update
+ remove
+ manage diff types s/w packages, dependenciew, version
+ using repositoriew
+ package-managers
+
+use:
+ server setup
+ ci/cd agent
+ install dependencies for pipeline
+ patch and update server
+ image creation
+
+types of package managers:
+============================ 
+  
+debiam. ubuntu  -> Apt
+rhel/centos/amazon linux -> yum/dnf/rpm
+suse -> zypper
+apt-get
+repostiory --- place/central storage location -- all s/w -- packages --
+  
+rmote servers:
+ repo url --- mirrors  #installing the package via
+ 
+ 1. base/main repo --> core os package
+ 2. update repo: security and bug fix updates
+ 3. optional/extras
+ 4. EPEL
+
+Where is the locatio of repo : /etc/yum/repos.d
+
+
+sudo yum installhttpd
+sudo yum remove -y httpd
+yum search nginix
+yum info nginix
+yum list
+yum list | wc -l   #total pacjage
+yum list installed | wc -l 
+    #list available
+sudo yum list docker*    #avaiable package
+yum grouplist | wc -l 
+yum grouplist            #available groups
+sudo yum groupinstall "Development Tools" -y   #install all development tool package
+yum install
+sudo yum groupremove "Development Tools" -y
+yum repolist all 
+
+
+q: whats the command for download the package wiithout install
+---------------------------------------------------------
+sudo yum install--download   #download the pacjages without install 
+sudo yum clean all 
+rpm -qa | grep nginix
+yum list | grep nginix 
+sudo yum history
+sudo yum history undo 5
+
+q: difference between yum and rpm 
+----------------------------------
+
+sudo yum uodate nginix
+sudo yuum upgrade nginix   # upgrade the repo not installation part
+sudo yum reinstall httpd 
+
+q:  
+
+ sudo yum check update 
  
