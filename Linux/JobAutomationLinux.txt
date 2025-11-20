@@ -219,6 +219,8 @@ What  is service:
   journalctl -u nginix
   
   
+  
+  
 19/11/25 - Package-Management
 ==============================
 yum - yellowdog update modifire, high level repo  
@@ -304,4 +306,95 @@ sudo yum reinstall httpd
 q:  
 
  sudo yum check update 
+ 
+ 
+20/11/25 : Memory management and swap management in Linux 
+===========================================================
+
+ RAM: --> COOKING TABLE
+ SWAP : --> Temporary Storage room
+ PROCESSES --> chef working on task 
+ KERNEL  --> KITCHEN MANAGER
+
+
+Memory Management:
+------------------
+HOW Much ram each process gets
+when to move data to swap
+how to free unused memory
+RAM is limited
+
+cache/buffer
+-------------
+ RAM
+ swap:  #when main memory full, swap the process in swap memory 
+ Process
+ Page    #fixed size of block in memory 
+ paging  # Load memory pages from disk in to RAM 
+ page fault 
+ Swapping
+ 
+oom killer:
+-------------
+ ram 
+ swap 
+ 
+cache 
+------
+ Read operation  # to fast the memory process
+ 
+virtual memory
+--------------
+ 16 gb --> vm hypervisor --> windows/linux 
+ 
+Memory leaks:
+-------------
+ memory wastage # particular process may hangup
+ 
+Thrashing:
+----------- 
+ Repeated functions for the particular process 
+ 
+Heap:  #Dynamic memory
+----
+
+stack :
+ call pwd  -> bin -> kernal -> Program
+RSS -- Resident set size
+VSS/VMSIZE  #RAM + swap + map
+Shared Memory  #
+
+
+ common commands:
+ ---------------
+  free 
+  iostat
+  vmstat
+  top 
+  htop 
+  dmesg
+  
+
+ man pmap
+ free -h    
+ man sync
+ cd /proc 
+ pwd 
+ ls
+ cd vm
+ ls
+ ls -la | grep drop_caches
+ cat drop_caches 
+ pwd
+ ls
+ cd ~
+ sudo sync 
+ echo 3 > /proc/sys/vm/drop_caches   #clear caches
+ man htop
+ htop 
+ demsg   #log 
+ 
+ 
+
+ 
  
