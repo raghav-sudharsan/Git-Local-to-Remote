@@ -1,0 +1,510 @@
+17) 02/11  - sudo & su 
+-----------------------
+
+use su & sudo
+----
+ su    #if you need full root session
+ sudo  #use of specific admin tasks without full root access
+ 
+ 
+ sudo
+ su    # substitute user or switch user including root but require passwd for target one
+ sudo -i   #directly switch to root shell
+ 
+user switch:  Su           sudo
+password:    require 
+
+
+
+
+20) 5/11/25 - How to implement sticky bit, setuid & gid:
+========================================================
+ sticky bit:
+ ------------
+  Prevent unauthorized deletion
+  
+  symbolic represent
+  --------------------
+   s - set/assign   #setuid 
+   S -  "           #setgid
+   t - asign
+   T - remove
+   1 - assign
+   0 - remove sticky bit
+   
+    s - in the userfield
+	S - in the groupfield
+	t - in other field ---sticky bit
+	
+	
+  sticky bit Permission:
+ -----------------------
+   4 - read
+   2 - write
+   1 - execute
+   
+   
+  
+create user and add into group
+-------------------------------
+ sudo su -
+ groudadd linux     #create new gorup
+ useradd x          #create new user
+ useradd y
+ useradd z
+ 
+ usermod -aG linux x  #adding user into existing group
+ usermod -aG linux y
+ usermod -aG linux z
+ 
+ cat /etc/group
+ 
+ 
+create common direectory
+------------------------
+ mkdir common
+ ls -ld
+ ls -ld common       #common dir should not root
+ chgrp linux common
+ ls -ld common       #group doesnot have the write wrights
+ chmod g+w common    # symbolic represent  - group + write permission 
+ ls -ld common  
+ chmod o+x /root     #others + executable permission in root
+ ls -ld common
+ 
+ 
+ su - x
+ whoami
+ cd /root/common
+ chmod 1774 common    #sticky bit  - 1
+ touch x1
+ ls
+ exit
+ 
+ su - y
+ cd /root/common
+ rm x1               #cant remove 
+ exit
+ 
+ ls -ld common
+ chmod -t common
+ ls - ld common
+ su - y
+ rm x1               #can remove
+ 
+ 
+ 
+ 
+ 
+21) file permissions - getfacl,setfacl
+=======================================
+ #Administrator can set the permission for specific users
+
+ getfacl   #get all permission including acls
+ setfacl   #set extra permissions
+ chattr
+ lsattr
+ 
+ acl: accesss control list
+ 
+ why do we need ?
+ appart from Owner, group ,other user, set permissions to specific user
+ 
+ multipl users need different permission on same  file
+
+
+add a user and assign the permissuion
+---------------------------------------
+ sudo grep ec2-user /etc/passwd         # to search the user in passwd file
+ ls -la /etc/passwd
+ sudo vi /etc/passwd
+ sudo useradd alice
+ echo "hi" > secret.txt
+ ls -l secret.txt                       #to view permission
+ 
+ getfacl secret.txt                     #to view the permissio of the file
+ setfacl -m u:alice:r-- secret.txt      # -m modifying u:username:read permission-- file.txt
+ getfacl secret.txt
+ 
+ sudo -u alice cat secret.txt     #trying to open a file as a alice
+ setfacl -x u:alice secret.txt    #-x execute, remove permission for alice
+ setfacl -b secret.txt            #remove the permission for all 
+ getfacl secret.txt               #can see the updated permission
+ 
+ setfacl -m u:alice:rw-- secret.txt  #assign the read and write permission
+ getfacl secret.txt
+ setfacl -m u:alice:--x secret.txt   #assign execute prmission
+ getfacl secret.txt
+ 
+ echo 'echo "hello DevOps" ' > secret.txt
+ chmod +x secret.txt         #set execute permission to files
+ sudo -u alice ./secret.txt  #to view the file    #will permission denied
+ 
+ 
+ ***Even set write and execute permission for the setfacl, can't access the file***
+    ----------------------------------------------------------------------------
+	Need to change the file attribute  
+    chattr +i  #immutable
+    chattr -i  #mutable	
+	chattr +a  #append
+	chattr +s  #secure deletion
+	chattr d   #notedown
+	chattr e   #extend format
+	lsattr     #list attribute of the specific file
+	
+    man lsattr 
+	echo "hello" > demo.txt
+	sudo chattr +i demo.txt     #+i -immutable. to change the attribute to immutable (cannot be modified)
+	ls -l demo.txt
+	
+	echo "modifing the file" > demo.txt
+	sudo echo "modify" >> demo.txt         
+ #cannot modify the file untill change the attribute 		  
+	
+	sudo chattr -i demo.txt      #-i mutable. change the attribute to mutable
+	sudo echo "modify" > demo.txt
+	cat demo.txt
+	
+	sudo chattr +i demo.txt      #+i immutable
+	sudo echo "modify" > demo.txt  #cant access 
+	
+	
+ q: what is the differenc between the stickybit and setfacl
+ 
+ 
+ulimit  -user limit
+--------------------
+-Types:
+  soft limit 
+  hard limit
+  
+ ulimit
+ ulimit -a
+ type ulimit
+ ulimit -n
+ ulimit -u
+ ulimit -a
+ lsns
+  
+
+ 
+23) 07/11   - Process Management
+=====================================
+ 
+ Booting process
+ ----------------
+  bios / uefi
+  bootloader
+  copy the kernal to load in memory
+  kernal initialize the os and create first process is called 
+   init or systemd  [Modern OS ]
+   pid of systemd is always 1 
+   
+ pstree     # 1st process - systemd
+ pstree -p
+ pidof systemd   #pi -print the process id
+ ps- fp 2320
+ ps -e | grep systemd   #-e  - everything
+ systemctl --user status
+ ps -lf          #-lf long list full format
+   #F    - flask
+    S    - process state
+    UID
+    PID
+    c    - CPU process utilization
+	PRI - Priority
+	Ni  - Nize value
+    ADDR - Memory address
+	SZ   No.of pages
+	WChan - Kernal related status
+	ps -ef
+
+    ps -u ec2-user                 #to view the process are attached to the particular user
+    ps -eo comm,pcpu,pmem | head   #ps -eo -everything output commands,process CPU,
+	pstree 
+	ps -eo comm,pcpu --sort -pcpu | head
+	
+	ps -C ps -o pid=2830     #to view process ids are associate with ps
+	ps -C ps -o pid=
+	ps -C bash -o pid=
+	
+	ps -eo pid,cmd e | tail -n 3   #e - environment variable
+	
+	
+ Need to see:
+  userid?
+  effectiveID?
+  id?
+    
+
+24) 10/11/25 -Process Management
+========================
+ last class:
+  what is process
+ what is program
+ diff between process and program
+ what is scheduler
+ what are the diff process states
+ what are the diff types of processes:
+  zombie
+  orphan
+  daemon process
+ what is process control table
+
+what is the initd or system process
+pstree command 
+
+pidof command
+how to view the process usinf ps with various arguments
+
+running instance of a program
+==============================
+ own memory, cpu contex, file description, environments and system resource.
+ 
+ ls --> create the process from -> /bin/ls
+  pid,ppid
+  
+  
+what happened when process is created
+----------------------------------------  
+
+ 1. parent process request a new process - fork
+    ps
+	bash is the parent process for every commands
+	
+ 2. Every process request new process
+    
+	kernal -> pcb ->#pcb contains - pid,process state, pc, cpu, register memory mappring,   #pcb - process control block
+	
+ 3. Kernal duplicate the parent resources
+    
+	copy-on-write--cow  -> copy the file descripter
+	
+	New process Request
+	 pid -> ppid -> kernal -> # kernal will create memory pages
+	
+	One tryse to modify the copy process will create
+	
+ 4. both parent and child will resume
+ 
+ 5. exec to load a new program  - docker exec
+	
+	
+ 
+ bash       # every command process, process id will create
+ echo $$  #print the current process id
+ bash
+ echo $$  #another process id will create
+ sudo cat /proc/2700/status       #2700 - process id  
+ 
+ Process of execution of order
+ ------------------------------
+ child execute program -> mainatin same pid - Loads binary disk into memory - kernal setup user space- schedular put the process in the ready que -process execution is begins
+ 
+ 
+ 
+strace - system call how internally communication, it will perform deeply scan the process.
+--------------------------------------------------------------------------------
+ type strace  #Strace - trace the system calls and signals
+ man strace
+ 
+ echo $$
+ echo $?  #to see executed command state
+  0       #0 - success
+  
+ sudo yum insatll -y docker
+ sudo systemctl strat docker
+ pgrep dockerd               #we can able to see pid by giving pname
+ sudo strace -f 28179        # cannot find ....
+ sudo strace -f dockerd      #will execute, 
+ 
+ ps -ef | wc -1         #wc - word count
+ ps -ef | grep dockerd
+ 
+ 
+ kill
+ -------
+ man kill
+ kill -l    #All the signal type can see  ****
+ kill -l | grep sig
+ 
+ 
+ 
+slepp:
+---------
+&   - run in background
+sleep 10000&  - #&- keep my program in background
+
+ man sleep 
+ sleep 10000&        # to set a sleep time for a specific process, 10000& - sleep, it will run in background
+ sleep 20000&         # 20000& - sleep time
+ sleep 20000&         # total three process will create 
+ ps
+ jobs -l            #list the background sleeping process
+  [3] + 28757         # + - indicates currently its running
+ 
+ 
+ 
+ bg to fg to bg
+ ----------------
+ fg 3               #foreground 3rd process
+ sleep 30000&       
+ fg 3 
+    #ctrl z - will stop the current fg process and exit
+ bg 3   #stopped process will start in the background
+	
+ kill %3         # kill process with job id
+ jobs -l
+ kill 28755      #kill with process id
+ jobs -l
+ pkill sleep     #kill with process name 
+ jobs -l 
+ 
+ sleep 10000&
+ sleep 20000&
+ sleep 30000&
+ killall sleep    #it will kill all the process with process id
+ 
+ sudo kill -9 1   #force kill with job id, kill -9 with job id
+ top
+ slepp 20000&
+ ps
+ kill -9 28920    #kill -9 - pause the signal in the intenal
+ ps
+ 
+ ps --forest      #display the process in the tree format
+ ps --no-headers
+ 
+ Process management:
+ -------------------
+ ps
+ pstree
+ psgrep
+ pidof
+ &
+ kill
+ pkill
+ killall
+ signals
+ fg
+ bg
+ jobs
+ slepp
+ 
+ 
+ 
+25) 11/11/25 - Process Monitoring
+==================================
+
+ Performance track - CPU, Memory ,i/o
+ 
+ Application issue
+  crash
+  hang  -------------> Stability
+  zombies
+  alerts
+  
+ Process health
+ cpu and memory : usage %, spikes, leaks abnormal
+ I/O utilization
+ thread count:
+ service ports:
+ error rates
+ 
+ Monitoring
+ ----------
+  top
+  htop
+  vmstat
+  iostat
+  sar
+  pidstat
+  systemctl
+  journalctl
+  
+ 
+ ***Discussed about realworls scenario of DevOps***
+ 
+ 
+ 
+ 26) 13/11/25 - Process Monitoring 
+ ===================================
+ 
+ Focus: Monitoring, incidents, troubleshoot in appliation and in Infra 
+ Monitoring and alerts 
+ exist process / script automation
+ Jira / service now    #tools 
+ triage                # cross examination
+  
+  
+  Monitor tools:
+   top,iostat,vmstat,sar, htop,vtop, atop,ps ,pidstat
+   Grafana
+   Prometheus
+
+ Process Monitoring:
+ -------------------
+  vm 
+  containers
+  pod  ---------- How cpu/memory/disk io/
+  network
+  
+ Why should i focus as a DevOps Engineer?
+ ----------------------------------------
+  1. Every automation activity   - Detect resource leaks 
+  2. identify bottlenecks
+  3. check abnormal activities over infra
+  4. High availability + Auto scaling decisions
+  5. Enable my Dashboard
+  6. Optimize the cost
+  
+ man pidstat    #can scan each and every process usage over a given time 
+ pidstat -u 1
+ sudo systemctl start docker 
+ pidstat -u 1 
+  
+  top - display linux process 
+  man top 
+  ps 
+  ps -ef | grep docker
+  ps -p (process id)    # to see specific process memory ***********
+  
+  top -u ec2-user   #to monitor the process of  user
+  top -H             #how many threads instead of process 
+
+  threads and process 
+  top -d 1             #refresh the system every 1 seacond
+  top -b -n 3          # continously run the command upto 3 times
+  top -b -n 3 > /home/raghav/proccess.txt   # store the output in the file 
+  top -o %MEM           #to nonitor only memory 
+  top -b n 1 | grep dockerd 
+  
+  sudo su -
+  cd /proc/stat
+  cat /proc/stat     #statisrics of the memory 
+  cat /poc/meminfo   #memory info
+  
+  cd /proc    #every process id will be there
+  uptime
+  cd /proc 
+  ls
+  cat uptime   #will get output 
+  file uptime  #uptime: empty
+  
+ man iostat
+ lsblk           #list of block 
+ cd ~
+ iostat     #i/o statistics
+ iostat -d  # to see temprory files
+ 
+ 
+ vmstat 
+ vmstat -s 
+  
+	
+	
+  
+  
+  
+  
+  
