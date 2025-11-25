@@ -422,5 +422,101 @@ sleep 10000&  - #&- keep my program in background
   systemctl
   journalctl
   
+ ***Discussed about realworls scenario of DevOps***
  
- ** Discussed about realworls scenario of DevOps***
+ 
+ 
+ 26) 13/11/25 - Process Monitoring 
+ ===================================
+ 
+ Focus: Monitoring, incidents, troubleshoot in appliation and in Infra 
+ Monitoring and alerts 
+ exist process / script automation
+ Jira / service now    #tools 
+ triage                # cross examination
+  
+  
+  Monitor tools:
+   top,iostat,vmstat,sar, htop,vtop, atop,ps ,pidstat
+   Grafana
+   Prometheus
+
+ Process Monitoring:
+ -------------------
+  vm 
+  containers
+  pod  ---------- How cpu/memory/disk io/
+  network
+  
+ Why should i focus as a DevOps Engineer?
+ ----------------------------------------
+  1. Every automation activity   - Detect resource leaks 
+  2. identify bottlenecks
+  3. check abnormal activities over infra
+  4. High availability + Auto scaling decisions
+  5. Enable my Dashboard
+  6. Optimize the cost
+  
+ man pidstat    #can scan each and every process usage over a given time 
+ pidstat -u 1
+ sudo systemctl start docker 
+ pidstat -u 1 
+  
+  top - display linux process 
+  man top 
+  ps 
+  ps -ef | grep docker
+  ps -p (process id)    # to see specific process memory ***********
+  
+  top -u ec2-user   #to monitor the process of  user
+  top -H             #how many threads instead of process 
+
+  threads and process 
+  top -d 1             #refresh the system every 1 seacond
+  top -b -n 3          # continously run the command upto 3 times
+  top -b -n 3 > /home/raghav/proccess.txt   # store the output in the file 
+  top -o %MEM           #to nonitor only memory 
+  top -b n 1 | grep dockerd 
+  
+  sudo su -
+  cd /proc/stat
+  cat /proc/stat     #statisrics of the memory 
+  cat /poc/meminfo   #memory info
+  
+  cd /proc    #every process id will be there
+  uptime
+  cd /proc 
+  ls
+  cat uptime   #will get output 
+  file uptime  #uptime: empty
+  
+ man iostat
+ lsblk           #list of block 
+ cd ~
+ iostat     #i/o statistics
+ iostat -d  # to see temprory files
+ 
+ 
+ vmstat 
+ vmstat -s 
+ man pidstat 
+ pidstat 2 5    #2 seconds 5 times 
+ pidstat -l     
+ pidstat -r     #Memory wise 
+ 
+ 
+ sar  #System activity information
+ sar -u 2 5      #to get CPU activity report for 2 seconds and 5 times 
+ sar -P ALL 2 5  #Processor report 
+ sar -u 1 10
+ sar -q 1 10
+ 
+ 
+  
+	
+	
+  
+  
+  
+  
+  

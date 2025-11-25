@@ -395,6 +395,176 @@ Shared Memory  #
  demsg   #log 
  
  
+24/11/25: Memory Management 
+============================================
+ 
+ Physical h/w memory RAM - Very fast 
+ swap:  isk-based virtual memory
+ 
+ 
+ How to calculate the free memory
+ --------------------------------
+ iostat 
+ mpstat 
+ top
+ vmstat
+ sar 
+ htop 
+ pidstat 
+ 
+ 
+ 
+ free 
+ free -s 2
+ free -m 
+ 
+ bc   #calculator
+ 
+ pidstat  #complete currrent task report
+ mpstat
+ 
+ tapestat   -
+ cd ~
+ dmesg | grep -i tape
+ ls -l /dev/st*
+ 
+ 
+ Swap management:
+ ----------------
+ if the eam size is less or = to 2Gb  -> swap=2*ram
+ if the ram size is greater than 2GB -> swap =2gb+RAm 
+ 
+ swap-in /pageout #if the pages or moving from ram to swap space
+ swap -out/pagein #the pages are moving from swapsapce to ram 
+ 
+ man swapon
+ mkswap
+ swapon
+ swapoff
+ swap
+ 
+ What is virtual memory= RAM+swap space 
+  
+  
+  
+ Completed topics:
+ ------------------
+*Linux Basic level Commands
+*File System Hierarchy
+*booting process in Linux
+*user management 
+*group management
+*process management
+*service management
+*job automation
+*text processing and utilities
+*package-management
+*Memory Management
+*Swap Management
+  
+  
+=================================================================
 
+ Swap Management
+ ---------------
+ 
+ Introduction to shell scripting:
+ 
+ sudo cat /etc/shells
+ bash --version 
+ echo $0         # to print the current interpretor
+ echo $?
+ echo $$ 
+ 
+ 
+ 
+25/11/25: shell scripting 
+============================================
+
+
+ cat /etc/shells
+ which bash 
+ man chsh     #change shell
+ sudo yum install util-linux-user -y     #install chsh packgage
+ echo $0
+ 
+ shell script format:
+ ----------------------
+  define the shell 
+  comments
+  define variables
+  commands 
+  statements
+ 
+ vi script.sh 
+ 
+  #!/bin/bash
+  #Purpose: build the script to perform automation
+  #Date: 11/25/2025
+  #Modification date:
+  #Author: Srinivasa Raju Tangella
+  
+ Introduction to variable 
+ -------------------------
+  light -weight scripting 
+  interpreted -based 
+  no need to use datatypes 
+  
+   name=sudharsan
+    age=18
+   variable=value
+   
+   a=10
+   b=20
+   c=30
+   serverIp=192.168.1.10
+  
+
+script 
+-------  
+ vi testserverconnection.sh 
+ 
+  #!bin/bash
+  SERVER=google.com
+  count=3
+  echo "Im going to ping my google server"
+  
+  ping -c $count $SERVER     #-c -argument  $ -place holder
+  
+  echo $?                    #command line argument 0 -success
+  
+  if [ $? -eq 0 ];then
+          echo ping success 
+  else
+          echo ping failed
+  fi 
+  
+  
+ sh testserverconnection.sh    #to run the script 
+ 
+ 
+ vi printnumber
+  #!/bin/bash 
+  a=10
+  echo $a     #$ -placeholder pointing to a variable 
+ sh printnumber
+      
+ vi ping_log.sh
+  #!/bin/bash 
+  server=google.com 
+  LOGFILE=/temp/ping_serverlog.txt 
+  ping -c 4 $server >> $LOGFILE 
+  echo $LOGFILE 
+  
+------------------
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
