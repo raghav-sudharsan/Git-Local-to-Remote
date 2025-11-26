@@ -478,8 +478,70 @@ Shared Memory  #
  
  
  
-25/11/25: shell scripting 
+25/11/25: Introduction to shellscripting 
 ============================================
+
+Different shell suported by Linux 
+ bash bourne again shell --
+ bourne shell ----- sh 
+ sh 
+ bash 
+ cshell
+ ksh
+ zsh
+ 
+ How to check supporting shell
+ -------------------------------
+ bash --version 
+ echo $0  # to print current shell 
+ sudo cat /etc/shells   #all the shell 
+ echo $SHELL 
+ type bash 
+ man bash 
+ 
+Q:
+
+what are the scripting conventions
+script file permissions
+shell script format
+how to execute the shell script
+ 
+ 
+ cli editor tools 
+ -----------------
+ vi
+ vim
+ nano
+ vscode 
+ 
+ 
+Script
+------- 
+
+ shell - interpretor -> instruction -> task -> kernal 
+ Automation - 
+ 
+ 
+ vi myfirstprogram.sh   #.sh - no need to give if default shell is bash 
+   #!/bin/bash 
+   echo welcome to shellscripting 
+   
+  file myfirstprogram.sh  # to find file type 
+  ls  -la myfirstprogram.sh  #execute permission need to set 
+  sudo chmod a+x myfirstprogram.sh 
+  ls -ls                   #got exec prmission 
+  sh myfirstprogram.sh     #to run the shellscripting  #sh filename.sh
+  bash myfirstprogram.sh   # bash also can run the shell scripting 
+  pwd 
+  ./myfirstprogram.sh      #./ - present working directory   #./filename.sh 
+   
+   
+ vi secondpro.sh 
+   #!/bin/bash          #without this line can also execute
+   echo "Hello World"
+   
+  sh secondpro.sh
+   
 
 
  cat /etc/shells
@@ -557,6 +619,129 @@ script
   echo $LOGFILE 
   
 ------------------
+
+26/11/25:
+=============================================
+
+ Information about variable 
+ ---------------------------
+  name
+  value 
+  type 
+  defaultvalue 
+  scope 
+  lifetime 
+  
+  used for :
+   server side validation 
+   DB validation 
+   application validation 
+   deployment validation 
+   remote file handeling  
+   backup handeling 
+   network validation 
+   cloud validation 
+   configure management 
+   monitoriing 
+   
+ why we need : 
+  store user input 
+  avoid repeating the same value 
+  store configuration settings 
+  to make scripts reliable/reusable/dynamic 
+  
+ syntax: 
+  variable=value 
+  
+ where we use these variables: 
+  all the places
+  
+ How many types of variables:
+  local variable 
+  environment variable 
+  shell variable 
+  variable scope 
+  lifetime 
+  
+  where varables are stored : memory of the shell proess
+ 
+ Variable scopes:
+  session scope 
+  user scope 
+  system or global scope 
+ 
+ 
+variable:
+ tool =k8s 
+ echo $tool  
+  
+  nano demovar.sh
+   #!/bin/bash 
+   version=22.0.4
+   echo "The value of version is : $version"
+   unset 
+   echo "The value of version is : $version"
+   
+  bash demovar.sh 
+  source demovar.sh 
+  type source 
+  ./demovar.sh  #permission denied ,coz of scope global variable not set 
+  sudo chmod 700 demovar.sh 
+
+ type unset 
+ a=20 
+ echo $a 
+ unset a 
+ echo $a  
+ 
+ session scope:
+ type set 
+ set | less    #to view predefined variable in shell-  
+ env           #list all the variable 
+ 
+ env | grep "name"
+ set | grep "name" 
+ 
+ ls -la 
+ 
+ where any user is logsin /etc/profile shell script is execute 
+ for every user , bash profile 
+ whenever new terminals is created , .bashrc  
+
+ nano.bashrc 
+  export NAME=sudharsan 
+  export TOOL=ARgocd
+
+ echo $Name 
+ env | grep "NAME"
+ echo $NAME 
+ echo $TOOL 
+ 
+ sudo useradd sudharsan 
+ sudo passwd sudharsan 
+ su - sudharsan 
+ 
+ cd /etc/profie 
+ nano profile 
+  export VERSION=1.0.0
+  
+ echo $VERSION 
+ exit   #reconnect the session 
+ 
+ env 
+ sudo - sudharsan 
+ whoami
+ echo $VERSION
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  
