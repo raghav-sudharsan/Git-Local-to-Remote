@@ -1,0 +1,119 @@
+11/12/2025: Introduction to Source Code Management in DevOps
+=============================================================
+ kind of process which is used to maintain clean code 
+ 
+ pull: 
+ push:
+ 
+ How to handle the release
+ --------------------------
+  tree -> origin ->
+  
+ gitinstallation.sh
+  #!/bin/bash
+  
+  if command -v git > /dev/null 2>&1
+  then
+      echo git
+	  
+	  
+12/12/25: 
+===========
+git is DVCS:
+------------
+ checkin
+ checkout
+
+cvcs:
+-----
+ if it crashes - development stops
+ no offline commits/should be online
+ 
+dvcs: distributed version control system:GIT
+---------------------------------------------
+
+
+basic terms:
+git --- tool ---- commands --- local repo
+github -- repo ---- remote repository
+branch 
+
+what is repository:
+---------------------
+folder with .git directory
+
+work flow:
+----------
+working directory --- unstaged/untraked area ---- staging area/index area --> commit area 
+
+
+git:
+----
+
+Build area --> Index area --> Commit area 
+ mkdir myrepo
+ git init
+ 
+  web hooks:
+   server side hooks
+   client side hooks
+   
+  git status
+  touch f1 f2
+  git status   #track new changes in working dir 
+  git add .    
+   cd .git
+   cd head
+  git status 
+  git commit -m "message"
+  git log 
+  git shortlog 
+  
+  
+15/12/25: Remote Repository
+===========================
+
+ porceian commands : user firendly commands: git add,git log...
+                   : high level commands 
+				   
+ plumbing commands : low-level internal commands 
+                   :debugging corrupted repos 
+				   :writing coustom git automation 
+				   :ci/cd analysis 
+				   :to understand how git is store the data
+				   
+what is remote repositiry?
+---------------------------
+ *is a distributed repository where we will share the code and maintain the code 
+ *github is not a tool 
+ *is repository used for hosting service 
+ *Provides centralized collaboration for the distributed teams 
+ *types oof repos:
+      public and private repos 
+	  
+ *we will maintain the private repo at corporate level 
+ *DevOps engineer will handling the repo: framework 
+ *maintain full git history 
+ *need to handle repos at deff leve : per project,organizarion 
+ *uses branches for parallel development 
+ *what is branch 
+   is linear independent work flow 
+   
+ *default branch is : master/main
+ *github enable forking repositories  # to create copy of remote repositories 
+ *github support PR workflows  #Pull request 
+ *PR enables code review before merge 
+ * supports RBAC (Role based Access control) -> Github/Jenkins/docker/k8s/aws-IAM
+ *user, team can work at organizational level 
+ * x ---> push the code to repo at feature branch -> owner define some mandatory reviewers 
+ *workflow automation 
+ *branch protection rules  -> must avoid direct commits 
+ *quality gates 
+  track the issue /tasks/bugs/enchacements
+ *webbooks -->restAPI
+ *proper version, builds, patches are numbering --tags --release 
+ *ci/cd automation -->githubaction  #define workflows -yaml 
+ 
+ 
+ 
+why we need remote repository? 

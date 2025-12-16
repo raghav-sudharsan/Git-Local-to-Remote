@@ -1,483 +1,3 @@
-17/11: Job Automation in Linux:
-================================
-Covered topics
----------------
-File System Module
-user management
-group management
-process management
-text processing utilities
-jobautomation
-general commands
-
-I
-==============================
-
-
-Job Automation:
-==============
-to run script
-to run some playbooks
-to run some kind of jobs In k8s
-to run schedule jobs in Jenkins
-job scheduling: execution of specific command//script
-
-could be one time(low system usage ) or
-recurring based on -predetermined time in the feature
-
-CI ---- Pull based mechanism:executing an automated build at scheduled
-time
-
-
-tools
---------
- daemons --background process
- 
- 1. atd
- 2. crond
- 3. systemd tiimers
- 
- atd: -at time deamon
- ---------------------
-  at time - one time execution in the feature
-   at 9:pm backscript.sh    - relook the execution next day 
-   
- crond:
- ------
-  /var/spool/cron
-  /etc/cron.d 
-  
-   at 9:pm backscript.sh    - No relook the execution next day 
-  
- controlling user access:
- -------------------------
- allow & deny   - /etc/directory
- 
- at -> at.allow, at.deny
- cron -> cron.allow, cron.deny
- 
-Schedular
------------
- /var/log/cron file
- 
- 
-Scheduling jobs with at command:
----------------------------------
- /var/spool/at   - save location
- at
- atq
- atrm
- 
- syntax:
- -------
- syn: at 1:20 am
-       at noon --12am
-	   at 12:50
-	  at midnight --12 am
-     at now + 5 hrs
-    at 3:00 1/1/2026 command
-    at 3:00 1/1/2026 -f /path of script file
-    at -f /home/ec2-user/scripts.sh now 3 hrs
-
-install the at if it is missed:
-------------------------------
-yum install -y at
-
- at 11:10 am tomorrow
- atq
- 
- sudo ls /var/spool/at   #job id
- atq
- at -d 5    #remove target job with id
- atq
- atrm 1     #at remove with job id
- 
- atq | awk '{print $1}' | xargs -r atrm
- atq
- 
- 
- to run specif jobs when the system load become low:
- ---------------------------------------------------
- 
-batch: is a command to run the job when the system load is low
-     : system decide the best time to run the script
-	 
-	  
-echo "hello , welcome to job automation in linux " > /tmp/output. txt
-batch
- at> echo "please execute jobs at $ (date) "
- at> /tmp/output.txt
-
-
-CPU-intensive tasks - batch
-=============================
-crond:
-
-crontab:
- cron table  #time table
- 
- vi /etc/crontab
- 
-# Example of job definition:
-# .---------------- minute (0 - 59)
-# |  .------------- hour (0 - 23)
-# |  |  .---------- day of month (1 - 31)
-# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
-# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
-# |  |  |  |  |
-# *  *  *  *  * user-name command to be executed
-
-
- yum installed | grep cron
- 
- 
- crontab expression
- ---------------------
- to run the script everyday at 5:30 am  - 30 5 * * *
- to run the script everyday at 11pm every day - 
- 
-
- 
-18/11/25: Service management in linux
-=======================================
-
-What  is service:
- these are the background program /tasks
- 
- sshd--handles ssh login
-  dockerd
- webserver--nginix
- 
- systemd
- 
- what is service management
- ----------------------------
-  controlling the life cycle of background service
-   start service 
-   stop service
-   restart service 
-   reload configuration
-   enable/disable auto-restart at boot
-   checks the logs and status
-   
-   systemd - systemctl
-   
-   what is the diff between process and services
-   --------------------------------------------
-    sevice- 
-	
-	auto-start at boot --- yes
-     unit file
-    each service is a process
- not every process is a service
-
- Nginix
- -------  
- socket: protocol://ipaddress:port
- 80
- security groups - inbound/outbound
- 
- which nginix 
- whereis nginix
- whatis 
- 
- 
- 
- 
- sudo yum install -y nginix
- sudo systemctl start nginix
- sudo systemctl stop nginix
- sudo systemctl status nginix
- sudo systemctl edit nginix
- " reload        # if any changes made in nginixconfigurations , must reload
- 
- man ln
- sudo systemctl list-units --type=service
- sudo systemctl list-units --type=service | wc -l
- sudo systemctl list-units --type=service | grep "nginix"
- 
- sudo systemctl is-active nginix   
- sudo systemctl is-enabled nginix
- 
- which nginix 
- whereis nginix
- whatis 
- 
- cd ~
- cd /etc/nginix
- 
- mask/unmask
- -----------
-  man systemctl
-  cd
-  sudo systemctl mask nginix
-  sudo systemctl status nginix
-  " stop
-  systemctl start nginix   # we cant start
-  " unmask
-  " start nginix 
-  journalctl -u nginix
-  
-  
-  
-  
-19/11/25 - Package-Management
-==============================
-yum - yellowdog update modifire, high level repo  
-rpm - red hat package management, low level repo
-
-
- What is software:
-  tools
-  os
-  db
-  application
-
-What is Software management in linux:
---------------------------------------
- package
- install
- update
- remove
- manage diff types s/w packages, dependenciew, version
- using repositoriew
- package-managers
-
-use:
- server setup
- ci/cd agent
- install dependencies for pipeline
- patch and update server
- image creation
-
-types of package managers:
-============================ 
-  
-debiam. ubuntu  -> Apt
-rhel/centos/amazon linux -> yum/dnf/rpm
-suse -> zypper
-apt-get
-repostiory --- place/central storage location -- all s/w -- packages --
-  
-rmote servers:
- repo url --- mirrors  #installing the package via
- 
- 1. base/main repo --> core os package
- 2. update repo: security and bug fix updates
- 3. optional/extras
- 4. EPEL
-
-Where is the locatio of repo : /etc/yum/repos.d
-
-
-sudo yum installhttpd
-sudo yum remove -y httpd
-yum search nginix
-yum info nginix
-yum list
-yum list | wc -l   #total pacjage
-yum list installed | wc -l 
-    #list available
-sudo yum list docker*    #avaiable package
-yum grouplist | wc -l 
-yum grouplist            #available groups
-sudo yum groupinstall "Development Tools" -y   #install all development tool package
-yum install
-sudo yum groupremove "Development Tools" -y
-yum repolist all 
-
-
-q: whats the command for download the package wiithout install
----------------------------------------------------------
-sudo yum install--download   #download the pacjages without install 
-sudo yum clean all 
-rpm -qa | grep nginix
-yum list | grep nginix 
-sudo yum history
-sudo yum history undo 5
-
-q: difference between yum and rpm 
-----------------------------------
-
-sudo yum uodate nginix
-sudo yuum upgrade nginix   # upgrade the repo not installation part
-sudo yum reinstall httpd 
-
-q:  
-
- sudo yum check update 
- 
- 
-20/11/25 : Memory management and swap management in Linux 
-===========================================================
-
- RAM: --> COOKING TABLE
- SWAP : --> Temporary Storage room
- PROCESSES --> chef working on task 
- KERNEL  --> KITCHEN MANAGER
-
-
-Memory Management:
-------------------
-HOW Much ram each process gets
-when to move data to swap
-how to free unused memory
-RAM is limited
-
-cache/buffer
--------------
- RAM
- swap:  #when main memory full, swap the process in swap memory 
- Process
- Page    #fixed size of block in memory 
- paging  # Load memory pages from disk in to RAM 
- page fault 
- Swapping
- 
-oom killer:
--------------
- ram 
- swap 
- 
-cache 
-------
- Read operation  # to fast the memory process
- 
-virtual memory
---------------
- 16 gb --> vm hypervisor --> windows/linux 
- 
-Memory leaks:
--------------
- memory wastage # particular process may hangup
- 
-Thrashing:
------------ 
- Repeated functions for the particular process 
- 
-Heap:  #Dynamic memory
-----
-
-stack :
- call pwd  -> bin -> kernal -> Program
-RSS -- Resident set size
-VSS/VMSIZE  #RAM + swap + map
-Shared Memory  #
-
-
- common commands:
- ---------------
-  free 
-  iostat
-  vmstat
-  top 
-  htop 
-  dmesg
-  
-
- man pmap
- free -h    
- man sync
- cd /proc 
- pwd 
- ls
- cd vm
- ls
- ls -la | grep drop_caches
- cat drop_caches 
- pwd
- ls
- cd ~
- sudo sync 
- echo 3 > /proc/sys/vm/drop_caches   #clear caches
- man htop
- htop 
- demsg   #log 
- 
- 
-24/11/25: Memory Management 
-============================================
- 
- Physical h/w memory RAM - Very fast 
- swap:  isk-based virtual memory
- 
- 
- How to calculate the free memory
- --------------------------------
- iostat 
- mpstat 
- top
- vmstat
- sar 
- htop 
- pidstat 
- 
- 
- 
- free 
- free -s 2
- free -m 
- 
- bc   #calculator
- 
- pidstat  #complete currrent task report
- mpstat
- 
- tapestat   -
- cd ~
- dmesg | grep -i tape
- ls -l /dev/st*
- 
- 
- Swap management:
- ----------------
- if the eam size is less or = to 2Gb  -> swap=2*ram
- if the ram size is greater than 2GB -> swap =2gb+RAm 
- 
- swap-in /pageout #if the pages or moving from ram to swap space
- swap -out/pagein #the pages are moving from swapsapce to ram 
- 
- man swapon
- mkswap
- swapon
- swapoff
- swap
- 
- What is virtual memory= RAM+swap space 
-  
-  
-  
- Completed topics:
- ------------------
-*Linux Basic level Commands
-*File System Hierarchy
-*booting process in Linux
-*user management 
-*group management
-*process management
-*service management
-*job automation
-*text processing and utilities
-*package-management
-*Memory Management
-*Swap Management
-  
-  
-=================================================================
-
- Swap Management
- ---------------
- 
- Introduction to shell scripting:
- 
- sudo cat /etc/shells
- bash --version 
- echo $0         # to print the current interpretor
- echo $?
- echo $$ 
- 
- 
- 
 25/11/25: Introduction to shellscripting 
 ============================================
 
@@ -813,6 +333,8 @@ variable:
   echo '$Tool'
   echo \$Tool 
 
+  env  #print the value of environment variable 
+  
  echo $$         #different between both
  echo $BASHPID   #different between both
  
@@ -1073,33 +595,195 @@ can use increment and decrement operators with (())
   
  
  
- 
- 
- 
- 
+04/12/25 :Shellscripting practical
+------------------------------------ 
+
+Count the char in reverse string 
+--------------------------------
+ vi revstring
+   reap -p "enter the string" str 
+   len=${#str}
+   echo $len 
+ sh revstring.sh 
+
+ nc 
+ man nc
+ socket: protocol+ipaddress:port 
+  
+ aws instance state in shell script 
+   0 : pending
+   16 : running
+   32 : shutting-down
+   48 : terminated
+   64 : stopping
+   80 : stopped
   
  
  
+ 6/12/25: Introduction to Arrrays and String 
+ ============================================
  
+ Arrays
+  tools=("k8s")
  
- 
+ types of Arrays: 
+  Indexed Arrays  - 0 based arrays
+  associative arrays 
   
+ syntax:
+  toolss=("k8a" "aws" "docker")
+  echo ${tools[0]}
+  #echo ${tools[@]}
+
+   toolss=("k8a" "aws" "docker")
+   for t in "${servers[@]"
+   do 
+     echo $t 
+   done 
+   
+   log={"var/log/dnf.log" "var"}
+   
+
+
+
+07/12/25:
+=========
+
+load those functions in to main script using source or .
+
+Project1: deploying Ecommerce app in to tomcat server using -- shell scripting
+  :git
+  :GitHub
+  :java
+  :maven
+  :tomcatserver
+  :logic using shell scritps
+  
+  
+  /#Project 1 -pending 
+  
+  
+  
+08/12/25: Debugging in shellscripting
+======================================
+
+ Process of finding and fixing the problem in the scripts 
+ 
+ Procedure:
+ ----------
+  understand the error message
+  findout what is the problem with the script
+  find the error location in the scrit
+  locate the line number from error message
+  fix the problem
+  
+  debugging mode:
+  ---------------
+  1. disabling the shell --> -n option 
+    -j ->noexecution useful to check only for syntax errors
+	
+   2. displaying commands while 
+   
+ bash -n project.sh  #-n -enable can check only syntax. can find the error in the file but not exactly where
+ bash -x project.sh  #-x -enable expansion, can find with each and every lines 
+ bash -v project.sh  #
+ bash -nv project.sh 
+ bash +xv project.sh #+xv -disable debug 
+ 
+ type trap   #advanced topic 
+  kill -l
+  top 
+  lsns 
+  trap -l 
+  man stty - need to study
+  
+  ps 
+  ps -ef | grep java 
+  kill 
+  
+  
+09/12/2025: Introduction to SED/AWK Editor
+==========================================
+
+ SED - noninteractive stream editor # non destructive editor  
+ 
+ sudo yum install sed -y 
+ sed --version 
+ syntax:
+  sed '/USA/p' country.txt 
+  sed -n '/USA/p' country.txt 
+  
+  sed '3,$d' country.txt
+  sed '/Japan/d' country.txt 
+  sed 's/cashew/Almond/'
+  
+
+  nano awk_emp.txt
+  awk '{print $1}' awk_emp.txt 
+  awk '{print $2}' emp.txt 
+  aws '$2> 22000 {print $1,$2}' awk_emp.txt 
+  
+   
+10/12/25:
+================================
+ what is local in shell:
+ -----------------------
+  type local 
+  nano demolocal.sh 
+    #!bin/bash 
+	name=john
+	welcome{}
+	{
+	  name="sudharsan"
+	  echo $name
+	 }
+     echo $name 
+     welcome 
+     echo $name 	 
+ o/p:
+  john 
+  sudharsan
+  sudharsan
+  
+  
+      #!bin/bash 
+	name=john
+	welcome{}
+	local 
+	{
+	  name="sudharsan"
+	  echo $name
+	 }
+     echo $name 
+     welcome 
+     echo $name 
+	 
+	 
+ type typest 
+ type declare 
  
  
+ how to use return keyboard in shell:
+ -------------------------------------- 
+ use inside the function 
+ if we want return a value to 
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+  type return 
+  
+  nano demoreturn.sh
+  #!bin/bash 
+  declare -r TRUE=0
+  declare -r False=1
+  
+  id 
+  
+  type readarray 
+  nano testlib.sh 
+  // 
+  
+  type source 
+  
+  build own libraries in shell 
+ -----------------------------
+  
+ ====================Linux Over============================= 
