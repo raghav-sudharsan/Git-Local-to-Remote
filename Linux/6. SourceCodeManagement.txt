@@ -1,9 +1,52 @@
 11/12/2025: Introduction to Source Code Management in DevOps
 =============================================================
- kind of process which is used to maintain clean code 
+ kind of process which is used to maintain clean code across the project life cycle
+ is kind of automated life cycle 
  
- pull: 
- push:
+ cicd pipeline: 
+      build files 
+	  pipeline files --> jenkins file 
+	  playbook files --> yaml file using ansible  
+      k8s manifest files
+      iac files --- terraform script
+      shell scripts
+      docker files
+      compose files
+      config/settings/properties files
+      gitops
+	  
+ scm: --store, track , manage and how to collaborate the cd
+   application code 
+   iac code 
+   configurations 
+   ci/cd pipelines 
+   documentation 
+ 
+why do we need scm in devops: 
+----------------------------- 
+  to maintain versioning of the code  
+  versions: Enhancement of the existing code/build/file/artifacts
+  collaboration between developers 
+  
+  rollback capability during failure 
+  how to handle the release 
+  
+  tree --> origin-trunk --> branches-leaf --tags
+  
+  secure control 
+  access control 
+  
+  branching stratagies
+  traceability:
+  integrations with devops 
+  
+  local repo: git  
+  remote repo: github 
+  
+
+ 
+ pull: execute automated build at schedule times 
+ push :execute automated build when there is change is happened at repository
  
  How to handle the release
  --------------------------
@@ -31,12 +74,21 @@ cvcs:
  
 dvcs: distributed version control system:GIT
 ---------------------------------------------
-
+1) can work at offline
+2) can have complete copy of repo at your workstation-local repo
+3)repository import
+4) branch mapping
+5) version history
+6) with out overriding can collaborate with others
+7)rollback
+8) pipelines, terraform-iac file
+9) release management
 
 basic terms:
-git --- tool ---- commands --- local repo
-github -- repo ---- remote repository
-branch 
+ git --- tool ---- commands --- local repo
+ github -- repo ---- remote repository
+  branch :
+   current linear development 
 
 what is repository:
 ---------------------
@@ -117,3 +169,245 @@ what is remote repositiry?
  
  
 why we need remote repository? 
+
+
+16/12/2025: public and private repository
+==========================================
+ create public and private repository 
+ .git 
+ 
+ how to access the github repo:
+ ------------------------------
+ via ssh
+ via 
+ 
+ cd /opt/
+ sudo yum install git 
+ git --version 
+ 
+ 
+ ssh-keygen -t rsa -b 4096 -c"raghav@gmail.com"  #secure hashing algorithm
+ 
+ 
+17/12/2025:
+=================
+
+
+why we need remote repository?
+------------------------------
+what is master
+what is origin/master
+git branch
+git branch -a
+git restore -- staged . --- moves the files from the traked to untracked
+git clone
+  * deep cloning    --> taking full history of the github
+  * shallow cloning --> latest commits only/no commit full history
+
+  git clone --depth=1 *github url  
+  git log | wc -l #print recent commits 
+  git log 
+  git log --oneline 
+  
+  git clone
+  git pull: download+merge 
+  git fetch --download
+  
+  git name-rev --name-only *
+  
+ Q: can you convert shallow clone to deep clone
+ ------------------------------------------------
+ git fetch --unshallow 
+  
+  
+18/12/25: Branch
+==================
+ is a pointer t commit 
+ current development workflow 
+ master/main 
+ development 
+ feature 
+ bugfix 
+ hotfix 
+ patch 
+ experiment without affecting the master/main code 
+ 
+ without banches:
+ ----------------
+ only one line of development
+ have risk of breaking production environment
+ no parallel development/work
+
+ with branches: 
+  parallel development 
+  clean,precise ci/cd pipeline 
+  easy rollback 
+  team collaboration 
+  
+ real DevOps engineer: 
+ --------------------- 
+  1. CI: 
+       pull: execute an automated build at schedule time 
+	   push: execute automated build where there is change is happen at specific branch of repo 
+	   runs on feature branches 
+	   
+  2. CD: happen only from stable branches: 
+  master
+  
+ where are branches used: 
+  feature development: 
+  feature/payment-api 
+  
+  bug fixing 
+  release 
+  hotfix 
+  
+ cicd pipelines:
+  
+ when soft code freeze happens:
+ -----------------------------
+  1. branching rules 
+  2. cicd rules 
+  3. human approval 
+  
+ what is hard code freeze: 
+  show stopper bugs 
+  
+ how hardcode feeze is enforced in git:
+  1. branch protection 
+     lock the branch 
+	 disable merge permission
+  2. ci/cd lock 
+  3. org policy 
+  4. feature flags 
+  
+  github/gitlab 
+  
+ branching commands:
+ -------------------
+  git branch 
+  git checkout 
+  git merge 
+  git push origin branchname 
+  git diff 
+  git rebase
+  
+ short-lived branches 
+ long -lived branches 
+ 
+ 
+ 
+ 
+  build
+  version
+  patch
+  hotfix
+  fixpack
+  major.minor.patch.buildno
+  major-minior.hotfix.buildno
+  
+  
+  
+19/12/25: Branch 
+=================
+Local Branch 
+------------ 
+List with last commit: 
+ git branch -v 
+ git pull 
+ git push 
+ git fetch 
+ git branch -a 
+ git branch branchname 
+ git checkout branchname 
+ git branch --merged  #list merged branch 
+ git branch --no-merged
+ git merge feature  #from master branch #fat-forward 
+ 
+ what is fast-forward merge: 
+ --------------------------- 
+ 
+ --pending
+ 
+26/12/2025: GitHub Action
+==========================
+ what is Github: 
+ ---------------
+ what is github and its features from the devops perspective
+  -what is organization: 
+           
+  what is project
+  what Is team
+  how to set the boundaries to the teams and users
+  what is GitHub:
+  
+  how to use GitHub and its features from the devops prospective
+  what is organization
+  how to add the users to the teams
+  how to create the repositories
+  how to apply repo and level, project and organizationlevel
+  settings
+  how to integrate the apps with GitHub to automatesomekind of work flow
+  
+  
+  -- pending 
+  
+29/12/2025 - Pull Request (PR)
+===================================================
+ Audit and history 
+ ----------------
+ every change has 
+  who cahanges
+  why changess 
+  when changed 
+  
+ when we for PR:
+ ----------------
+  1. adding new feature 
+  2. fixing a branch 
+  3. hotfix in production 
+  4. Refactorization code 
+     testcase -- fail-red --test-green 
+  5. infra changes 
+      k8s yaml 
+	  .tf files 
+	  ci/cd pipelines 
+	  
+ flow of PR:
+ -----------
+  create a new branch 
+  make code chamges 
+  push branch to github 
+  create PR 
+  review + comments 
+  CI checks pass 
+  manage PR 
+  
+  branch deletion 
+  
+PR rules/complainces:
+--------------------- 
+* FEATURE+REFACTOR+CONFIG CHANGES ---- PR
+* give proper menaning-ful PR TITLE and
+description
+* PR --- review --- minium approval
+* ci must pass before merge  
+   build fails 
+   tests fail 
+   security scans fails 
+   
+* note: only PR-based merges should allow 
+* delete branch after merge 
+
+ git clone vs git fork 
+ 
+ Branch protection:
+  SAST
+  DAST 
+  
+CI -first steps 
+  code checkout --> Dependency analysis --> code compile 
+  
+  
+
+
