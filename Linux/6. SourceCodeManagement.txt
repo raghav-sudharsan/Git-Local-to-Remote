@@ -407,7 +407,112 @@ description
   
 CI -first steps 
   code checkout --> Dependency analysis --> code compile 
+ 
+
+ 
+30/12/2025: Github-action
+============================
+* GitHub/bitbuckey/GitLab/code commit/azurerepo
+
+*what are the github-actions: 
+------------------------------
+ is ci/cd platform
+ is a kind automation tool
+ used to automate work-flow --- when something happens in repo-need to automate that flow
+ yaml-based flow
   
+*Multiple things are happen-something --> events
+  event: --> PR 
+        create the branch 
+	    any issues
+	    code push 
+	    merged 
+	    release 
+* Must be inside the repository 
+* Path: githubrepo/.GitHub/workflows/demo.yaml 
+* Workflows 
+* workflows are defined in yaml file 
+* every workflows has a name  
+* workflow is triggered by one or more event 
+* workflow contains jobs
+    collections of task is jobs 
+* Jobs are running on runners : - self-hosted runners 
+
+* types of runners in GitHub:
+----------------------------- 
+1. github-hosted runners 
+   vm : ubuntu,windows,mac 
+   run-on: ubuntu-latest 
+   
+2. Self-hosted runners 
+   can run on our servers/vms/cloud instances  
+   
+3. Organization-level runners 
+    large-level 
+	large enterprises 
+	multiple-team using CI Infra 
+	
+4. repository level-runners 
+5. grouped runners: 
+     logical grouping of sel-hosted runners 
+6. ephemeral self-hosted runners 
+7. large/high -performance runner --paid
+
+
+flow: 
+====== 
+ .Github/workflows/demo.yam --jobs --step --github runners 
+ 
+--pending 
+
+31-12-2025: GitHubaction
+============================
+ what is githubaction
+ --------------------
+ is a workflow 
+ 
+ workflow structure 
+ ------------------ 
+  login asgithubuser --> select your repo --actions --> name.yaml 
   
+#sampl yml
+--------------
+ name: Hello world workflow
+ on: push
+ jobs :
+   hello-job:
+     runs-on: ubuntu-latest
+     steps:
+      - name: Print Hello
+        run: echo "hello weclome to github actions-world"
+
+checkoutrepo.yml 
+----------------- 
+ name: Chekout code
+ on: push 
+ jobs: 
+   checkout-job:
+      runs-on: ubuntu-latest 
+	  steps: 
+	    - name: checkout repo 
+		  uses: action/checkout@v4 
+		- name: print all files 
+		  runs: ls -la 
+
+ name: Run Linux Commands
+ on:Ipush
+ jobs:
+   shell-job:
+   runs-on:
+   steps:
+
+     - name: Run commands
+       run: ubuntu-latest
+
+
+
+
+
+
 
 
