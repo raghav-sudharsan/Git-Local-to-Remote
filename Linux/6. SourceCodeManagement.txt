@@ -465,6 +465,8 @@ flow:
  
 --pending 
 
+
+
 31-12-2025: GitHubaction
 ============================
  what is githubaction
@@ -477,14 +479,14 @@ flow:
   
 #sampl yml
 --------------
- name: Hello world workflow
- on: push
- jobs :
-   hello-job:
-     runs-on: ubuntu-latest
-     steps:
-      - name: Print Hello
-        run: echo "hello weclome to github actions-world"
+name: Sudharsan first workflow
+on: push
+jobs:
+  hello-job:
+    runs-on: ubuntu-latest
+    steps:
+     - name: Print Hi Sudharsan
+       run: echo "first workflow success"
 
 checkoutrepo.yml 
 ----------------- 
@@ -495,7 +497,7 @@ checkoutrepo.yml
       runs-on: ubuntu-latest 
 	  steps: 
 	    - name: checkout repo 
-		  uses: action/checkout@v4 
+		  uses: action/checkout@v4   #under action/ checkout-version4 - predefined  #checkout is function , it will clone the code automatically
 		- name: print all files 
 		  runs: ls -la 
 
@@ -510,9 +512,111 @@ checkoutrepo.yml
        run: ubuntu-latest
 
 
+02/01/2026: GitHub Action Project
+================================== 
+ Build github-actions -workflow -to deploye web application to tomcatserver:
+ ------------------------------------------------
+ 
+ Seen how to generate the package using Java+maven via githubactions 
+
+ step1: Create Ec2 Instance
+ step2: download and install tomcat server on ec2-server
+ step3: lets unzip/untar the tomcat directory
+ step4: try to configure the tomcat-user
+ step5: start the tomcat server
+ step6: access the tomcatsever-ui
+ step7: build the githubactions
+ step8: run the work-flow to deploy war to remote server-mumbai-
+ 
+ 
+
+ 
+5/01/2026: Github-action -Project 
+==================================
+GitHub : https://github.com/sresrinivas/Ebusiness.git
+
+build workflow for the following actions:
+-------------------------------------------
+ 1) raise the PR
+ 2) review the PR
+ 3) Perform Merging
+ 4) if any conflicts or not try to send notification to the user via slack
+ 
+ CI: 
+
+
+  ---practical session---
+
+
+06/01/2026: Build Automation:
+=============================
+What is build: 
+--------------
+ is a set of executable source code generated after compilation.
+  20 devlopers -- 20 pieces as files --- integration --one final piece 
+
+ build process: converting source code in to runnable , deployable as artifacts.
 
 
 
+build format:
+=============
+ language -- code -- java ---> jar/war/ear/image 
+             code -- .net ---> dll 
 
 
+without build what happens:
+---------------------------
+
+ 
+why do we need build: 
+---------------------
+ consistency 
+ repetability
+ traceability 
+ 
+ 
+Types of builds:
+----------------
+ nightly build 
+ ---------------
+  patch build: bug fix /security 
+  hotfix build 
+  release build 
+  Development build 
+
+
+How th builds are trigger: 
+---------------------------
+ Manual build 
+ automated build : --CI-SERVER-JENKINS 
+ Scheduled: -- pull 
+ Event-driven build: push,PR,merge 
+ 
+Based on architecture:
+----------------------
+ monolithic
+ microservice
+ serverless 
+ 
+ node.jjs: .tgz,buldle 
+ python: .whl, tar.gz
+ go:   binary 
+ docker: --image 
+ k8s: helm chart 
+ 
+ front end: --- static assets 
+
+Build Automation:
+-------------------
+ build tools: 
+ ------------- 
+  used to automate the build process 
+  
+  Java: --> maven, gradle 
+  node.js: --> npm,yarn,pnpm 
+  .Net : msbuild 
+  python: poetry 
+  go --go build 
+  
 
