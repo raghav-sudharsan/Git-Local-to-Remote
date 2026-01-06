@@ -1,0 +1,10 @@
+#sample yml
+--------------
+name: Sudharsan first workflow
+on: push
+jobs:
+  hello-job:
+    runs-on: ubuntu-latest
+    steps:
+     - name: Print Hi Sudharsan
+       run: echo "first workflow success"
