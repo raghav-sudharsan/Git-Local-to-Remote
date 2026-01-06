@@ -499,18 +499,26 @@ checkoutrepo.yml
 	    - name: checkout repo 
 		  uses: action/checkout@v4   #under action/ checkout-version4 - predefined  #checkout is function , it will clone the code automatically
 		- name: print all files 
-		  runs: ls -la 
+		  run: ls -la 
 
- name: Run Linux Commands
- on:Ipush
- jobs:
-   shell-job:
-   runs-on:
-   steps:
 
-     - name: Run commands
-       run: ubuntu-latest
 
+
+name: Run Linux Commands
+on: push
+jobs:
+  shell-job:
+     runs-on: ubuntu-latest
+     steps:
+       - name: Run commands
+         run: |                    #| - pipe symbol, Allows multi-;ine shell commands
+                echo "welcome to github-action"
+                pwd
+                whoami
+                echo "list some files"
+                ls
+
+ | --> Allows multi-;ine shell commands 
 
 02/01/2026: GitHub Action Project
 ================================== 
