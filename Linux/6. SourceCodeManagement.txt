@@ -627,4 +627,85 @@ Build Automation:
   python: poetry 
   go --go build 
   
+  
+07/01/2026: Application Engineering 
+====================================
+working for the applications/environments/schedules/deliveries/client not for the tools
+
+ *design
+ *build
+ *structured
+ *configured
+ *deployed
+ *reliable
+ *scalable
+ *testable
+ *automated under diff environment
+
+health/logs/metrics
+
+
+Key reasons start at application engineering:
+----------------------------------------------
+ 1. Security starts at application configurations 
+ 2. Weak app design 
+ 3. CI/CD pipelines operated on applications not tools 
+ 4. maven+docker -- image 
+ 
+What to focus in application:
+------------------------------
+ Application fundamentals:
+  language & runtime 
+  entry point 
+  build system 
+  
+Application life cycle:
+-----------------------
+  startup   # init - like initalize pre service before start the main service 
+  shutdown behavior 
+  failure modes 
+  retry logic 
+  graceful termination
+  
+Configuration model:
+---------------------
+ environment variables
+ config files 
+ .kube/ configuration module
+ secret handling 
+ runtime overrides 
+ 
+Dependency model:
+-----------------
+ Database 
+ external service 
+ caches
+ message brokers
+ 
+Observability:
+--------------
+ logs 
+ metrics 
+ health checks 
+ error handling
+
+1. Application structure and design 
+------------------------------------
+ 1. Know the application entry points : -spring boot, node index.js, main 
+   * understand how the app stops 
+ 2. build and packing 
+ 
+ 
+ 
+07/01/2026: Introduction to Maven
+===================================
+what is maven: 
+-------------- 
+ is a build tool 
+ used to automate the build process  
+ 
+ 
+ 
+
+ 
 
