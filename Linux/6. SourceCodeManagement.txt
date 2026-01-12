@@ -703,9 +703,166 @@ what is maven:
 -------------- 
  is a build tool 
  used to automate the build process  
+ is written in java 
+ platform independent 
+ platfom: OS+Processor 
+ opensource 
+ follows the conventions rather than configuration
+ 
+ require a build file: ---xml based 
+ build file:--> pom.xml 
+ what is pom --> project object model 
+  used for project management purpose  
+  used for reporting 
+  
+ have its own predefined life cycle 
+ defines the order of exxecution 
+ supports the order of lifecycyles 
+  default 
+  clean 
+  site 
+  
+ *lifecycle -- phase -->plugins --> goals
+ *Dependency management tool 
+ Repository : local, remote, central repo: mvnreposotory.cm
+ build cache 
+ portability of the build  
+
+ dev/qa/uat/sit  -profiles
+ maven with +CI SERVER tools
+ maven+git+svn+codecommit+azurerepo
+ maven+docker+ansible+k8s+
+ maven cli ->mvn
+ maven+multiple server
+ can do deployment, undepployment , rdeployment
+ 
+ maven proper project tree structure
+
+ Java architecture 
  
  
+09/01/2026: Maven - regular terms used in DevOps
+==================================================
+CI-Server 
+---------- 
+ Jenkins 
+ GitLab ----> Build file ---Java--> pom.xml
+ githubactions 
+ azuredevops 
+ pom -->Project object model 
+ build automation 
+ dependency management 
+ 
+Maven:
+-----
+
+build tool:
+-----------
+order of build execution
+3 life cycles :---- default/clean/site
+
+artifacts ---- final output ----- > jar/war/ear/image
+
+what is dependency: 
+------------------- 
+ software dependency 
+  xml elements  --- gav properties  #group ID ,srtifact ID, version 
+  
+dependency managemnnt
+---------------------
+
+artifact 
+---------
+ output ---->war/ear/image/jar 
+ artifactID+code----  /op ----- artifacts -- jar
+
+version:
+--------- 
+ 1. snapshot 
+ 2. release 
+ 
+snapshot: 
+---------- 
+ development version ---still changing, not final 
+ 
+release:
+----------
+ stable and production -ready version 
+ 
+packaging:
+-----------
+ format of artifact --output 
+ 
+what is pom.xml:
+---------------
+ pom.xml 
+ 
+ build file/maven configuration file 
+ 
+repository :
+------------
+ storage location for artifacts and dependencies
+ 
+ 
+nexus/jfrog
+image --- dockerhub/ecr/acr/
+
+local repository:
+-------------------:
+
+~/.m2/repository
+
+remote repository:
+------------------------:
+
+custom repository hosted inside the company/organization
+
+     nexus/jfrog-artifacttory/dockerhub/ecr/acr
+
+
+build lifecycle:
+-----------------
+
+lifecycle --- phases ----- plug-ins --- goals
+
+phases :
+-----------:
+
+collections of predefined steps that will help to maintain the order of build execution
+
+   default:---23 
+   site:
+   clean
+
+plug-in:
+----------
+ extension to maven used to perform task 
  
 
+Maven configration: 
+-------------------
+ cd opt/
+ yum git  -y 
+ git clone ------  #
+ mvn validate 
+ mvn compile 
+ mvn test 
+ mvn package 
+ 
+buiod ssection
+---------------
+ 
+what is dependency tree: 
+-------------------------
+  
+what is metadata:
+----------------
+ version 
+ packages 
+ checksums
+
+ 
+ 
+ 
  
 
