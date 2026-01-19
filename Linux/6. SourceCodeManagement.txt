@@ -860,7 +860,119 @@ what is metadata:
  version 
  packages 
  checksums
+ 
+ 
+--pending 
 
+
+
+
+========================================
+10/01/2026: what is archetype in maven 
+=======================================
+ it is a project templete generator
+ create a project with predefined structure, filels, directories and configurations 
+ 
+ understand the application architype
+ -------------------------------------
+  desktop application 
+  microservices 
+  web application 
+  enter-prise
+  
+ when run the archetype , maven creates 
+  - src/main/java ----------> development code 
+    src/main/resources 
+	src/test/java   --------> testing code: ----> UNIT Testcases/IT 
+	
+why maven Introduced Archetype:
+--------------------------------
+ Project consistency 
+ reproducibility 
+ standards 
+ faster project bootstrapping 
+ 
+how many types of archetypes: 
+------------------------------
+ 1. official maven archetype 
+ 2. framework specific archetypes 
+     spring boot 
+	 micronut
+	 camel 
+	 quarkus 
+	 Jakarta EE
+ 3. coustom corporate archetype 
+ 
+Why devops engineers need to know archetype: 
+----------------------------------------------
+ Must understand project standards --CI/CD 
+ 
+ Automation at scale 
+ 
+ devops must creates organization templetes 
+   microservices templetes 
+   testing templete
+   docker templete 
+   CI/CD 
+   k8s deployment 
+   
+ enables the GITOPS + Platform engineering 
+ 
+ archetype + helm + k8s + argocd 
+ security and complience 
+ dependency management 
+ dependency analysis
+ 
+
+
+==========================================
+12/01/2026: what is acrchetype in maven
+=========================================
+Project templete --- create structure 
+dev---push the code ---github --integrate in to CI Server --- run the CI pipeline --checkout the code 
+---> verify the code is having proper mandate files or not -- build file--pom
+
+ mvn archtype:generate -DgroupId=com.srini.eapp -DartifactId
+
+ validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile,
+process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources,
+test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test,
+post-integration-test, verify, install, deploy
+
+
+what is source:
+----------------
+ all java releate files that need to compiled in to byte code--.class --
+ build = collection of .class 
+ 
+ what are resource in maven:
+ ---------------------------- 
+ non-java files needed by the application during the runtime 
+ 
+ 
+ 
+ 
+19/01/2026: Introduction to pom.xml:
+===================================== 
+ it is a build file 
+ is a configuration file 
+ dependencies 
+ build plugings 
+ 
+ project versions: major.minor.patch 
+                 : major.minor.build 
+				 :major.minor.hotfix 
+ repository details: 
+   :snapshot repositories 
+   :release repositories 
+   
+ profiles: build profiles 
+ ci/cd integration 
+ servers:tomcat/weblogic/websphere/jboss
+  
+  
+ 
+ 
  
  
  
