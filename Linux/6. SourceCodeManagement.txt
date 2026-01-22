@@ -80,7 +80,7 @@ dvcs: distributed version control system:GIT
 4) branch mapping
 5) version history
 6) with out overriding can collaborate with others
-7)rollback
+7) rollback
 8) pipelines, terraform-iac file
 9) release management
 
@@ -970,11 +970,218 @@ what is source:
  ci/cd integration 
  servers:tomcat/weblogic/websphere/jboss
   
+ Webapplication
+  enterprise: ----------> multi-module integration 
   
+  package: jar/war/ear 
+  codecoverage plug-in : cobertura/pmd/checkstyle/jacoco/jxr 
+  
+  sast: -- sonarQube
+  
+ test result
+ distrubution management
+ binary artifactory integration: Jfrog /nexus 
+ 
+ mvn install 
+ mvn deploy 
+ 
+ maven+docker  --->image -- push the images -- dockerhub
+pom. xml ---> docker plug-ins :--- mvn docer:build
+war
+
+maven+github/bitbucket 
+release management 
+
+  
+ Three TYPES OF pom: Project Object Modle
+-------------------------------------
+
+ 1. Parent pom:  aggregator POM     #widely used in microservice architecture 
+     
+	 
+     multi-modules 
+     microservices 
+     ci/cd build orchestration 
+     
+     service 1: ---------jar+pom 
+     s2 : -----------------jar 
+     s3 : ----------------jar 
+     
+     **should know how to deploy monolithic and micro dervices application ****
+
+ 2. child pom:
+ -------------
+ 
+ 
+ 3.super pom:
+ -----------
+  maven build on top of apache
+  
+  apache --- convention   ---implicit ---- super pom 
+ 
+ 
+  ==========================
+   POM Elements
+   ---------------------------
+    * Project info
+    * maven coordinates 
+    * versions 
+    * packages 
+    * dependencies 
+    * distributed management [nexus or jfrog]
+    * plug-ins 
+    * repositories 
+    * profiles 
+    * sast 
+    * deployment automation 
+    * source code management integration 
+    * multi-modules 
+   ---------------------------------------
+   
+ * whith in pom.xml - 2 plugins 
+ ------------------------------
+   build plug-ins 
+   reporting plug-ins 
+   
+-complpete 
+ 
+ 
+20/01/2026: Deploying sample hello-world application in to tomcat using pom.xml 
+===============================================
+
+ launch virtual server :---- ec2-redhat/amazon
+ login as root user: sudo su -
+ move to opt directory: cd /opt
+ install and configure java:
+   JDK: JAVA DEVELOPMENT KIT
+        JAVAC ---COMPILE the code ---.class ---Bytecode
+   JRE: JAVA RUNTIME ENVIRONMENT --- JVM---.Classs
+ 
+ CI --Apps --JavaBased 
+ 
+ compile -->mvn compile -->main and test code -->java compiler -->.class (byte code) ---> JRE 
+
+
+
+ sudo su
+ cd /opt 
+ yum install -y java-17*
+ java -version 
+ find /usr/lib/jvm/java-17* | head -n 3
+ vi ~/.bash_profile
+    JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.50.amzn1.x86_64
+ wget https://dlcdn.apache.org/maven/maven-3/3.9.12/binaries/apache-maven-3.9.12-bin.tar.gz
+ ls 
+ tar -xzvf apache-maven-3.9.12-bin.tar.gz   #(tar -tape archieves and gz - gunzip)
+ mv apache-maven-3.9.12/ maven 
+  #adding mavn home path 
+ vi ~/.bash_profile
+   M2_HOME=/opt/maven
+   M2=/opt/maven/bin
+   PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2:$M2_HOME
+
+    export PATH
+ source ~/.bash_profile  #source -to make the changes permanent
+ java -version 
+ mvn --version   (maven supports archetype)
+ mvn archetype:generate -DgroupId=com.pro.app -DartifactId=webpro -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+ 
+        [root@ip-172-31-16-250 opt]# ls
+       aws  maven  webpro
+       [root@ip-172-31-16-250 opt]# cd webpro/
+       [root@ip-172-31-16-250 webpro]# ls
+       pom.xml  src
+       [root@ip-172-31-16-250 webpro]# cd src/
+       [root@ip-172-31-16-250 src]# ls
+       main
+       [root@ip-172-31-16-250 src]# cd main/
+       [root@ip-172-31-16-250 main]# ls
+       resources  webapp
+       [root@ip-172-31-16-250 main]# cd webapp/
+       [root@ip-172-31-16-250 webapp]# ls
+       WEB-INF  index.jsp
+       [root@ip-172-31-16-250 webapp]#
+
+ cd webpro/   #pom.xml should exist 
+ mvn package  #webpro.war will be create
+
+#instaling apache-tomcat
+------------------- 
+ wget https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.93/bin/apache-tomcat-7.0.93.tar.gz
+ tar -xzvf  apache-tomcat (x-extract z-folder v-verbose on screen f-all files)
+ cd /opt/tomcat/conf/   #tom cat credentials and other important files are stored
+ 
+ 
+ Difference btw Monolithic and Microservices 
+  Monolithic  - Everything Manuall
+  Microservices  - some of comes with build in 
+  
+ current action 
+  mnv package --> war (web archive(collection of .class files )) --> can access application by --> place war in Web server (tomcat )
+ 
+ Time: 1.0.0.18
  
  
  
- 
+21/01/2026: Introduction to Build profiles in Maven:
+=====================================================
+
+ *build profile is a xml element in pom.xml 
+  application need to deploy for different environment 
+  to achieve build portability 
+  to customize 
+    jvm args 
+    plug-in config 
+    dependencies 
+    resource filtering 
+    build properties 
+    environment variables 
+    output directory 
+  to change the build behaviour 
+   UAT --->
+   QA ---> 
+   prod --> 
+   
+   
+  * acheive 0 manual switchich to profiles 
+  
+  types:
+   pom.xml
+   setting.xml 
+   
+what are the diff activation types:
+------------------------------------
+
+
+22/1/2026:
+============
+
+dependency management
+-----------------------
+ Process of 
+          declaring 
+		  downloading
+		  versioningorganize
+		  maintain the libraries
+		  
+ spring-boot:
+ --------------
+    MySQL driver 
+	
+	
+	
+dependency analysis
+depdency resolution
+types of dependencies
+what is dependency scope
+what are the diff steps involved to handle dependencies
+
+*integration of testcase execution using jun
+ importance of sast,owasp dependency analysis
+*code-coverage and code quality
+
+*analysis of test reports
+	
  
  
 
