@@ -554,6 +554,48 @@ depdency resolution:
    * environment 
    * reproducibility issues 
  
+who will take care?
+-----------------------
+ developer : -- declare the dependencies 
+ build tool: -- resolves++deownloads 
+ devops: cashing/build/security 
+ 
+DevSecOps: --track the cves,version,policies 
+
+why should devops care:
+------------------------
+ sca 
+ cve 
+ SBOM 
+ 
+Where dependency available: 
+---------------------------- 
+ dependency 
+ compile : compile+test+runtime ---- yes ----springboot 
+ 
+ Provided: compile ------------- package 
+ 
+ runtime: runtime_test ------ yes ------jdbs driver 
+ 
+ test :  test ---------- no ------ junit
+ 
+ system : compiletime  ------ local 
+ import  dependencymanagement  --- no -----BOM 
+ 
+ <dependencies>
+           <g>
+		   <a>
+		   <v>
+		     <scope>
+			
+			
+tools:
+------ 
+ build tools: maven, gradle ,npm, pip 
+ repos : -------- nexus/artifact,jfrog 
+ 
+ 
+ 
  
 types of dependencies
 what is dependency scope
@@ -564,3 +606,43 @@ what are the diff steps involved to handle dependencies
 *code-coverage and code quality
 
 *analysis of test reports
+
+
+
+23/01/26:
+============
+
+mvn dependency:analyze 
+mvn dependency:tree:
+----------------------
+ detect the conflicts 
+ 
+mvn dependency:resolve:
+--------------------------
+ download all dependencies 
+ 
+resolce
+
+27/01/26:
+========================
+
+SAST:static application security testing 
+
+   checks the source code
+   bytecode --- java -- compile ---. class --- bytecode
+   binaries without running the application.
+
+code -- Jbuild---sast --- test -- deploy
+
+
+sast checks:
+-------------
+ sql injection 
+
+
+
+HANDLING ARTIFACTS AND Storing Artifacts -- Nexus/Jfrog
+
+ 
+
+
