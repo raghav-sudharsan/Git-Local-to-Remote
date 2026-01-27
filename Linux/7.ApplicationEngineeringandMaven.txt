@@ -623,6 +623,9 @@ mvn dependency:resolve:
  
 resolce
 
+
+
+
 27/01/26:
 ========================
 
@@ -637,9 +640,107 @@ code -- Jbuild---sast --- test -- deploy
 
 sast checks:
 -------------
+FIND THE VULNERABILITIES IN CODE 
+
  sql injection 
+ xss---cross--site scripting
+ unsafe deserializaion
+ command injection 
+ haded corded secret /token 
+ insecure cryoto usage
+ buffer overflow
+ 
 
 
+maven+sonarqube+jenkins: --mvn sonar:sonar
+
+sast tools:
+------------
+ sonarQube
+ checkmarx
+ varcode -------------------enterprise/cloud 
+ fortify 
+ gitlab sast 
+ github codeQ1
+ 
+Opensource:
+------------
+ semgrep
+ bandit
+ findsecbugs
+ ESLintsecurity plug-ins 
+ 
+when sast runs:
+----------------
+ every PUSH
+ every PR
+ Nightly scan the code on master/main branch 
+ Full scans before release
+ 
+ 
+DevSecOps
+---------
+
+Shift-left principle:
+-------------------------
+ fix the vulnarabilities as early as possible
+ 
+ code -----SAST 
+ build --------SCA[Software composition Analysis]
+ runtime --------DAST 
+ Production--------CWPP/WAF 
+ 
+ SAST vs DAST vs SCA:
+ ========================
+ SAST ---source code --PRE Build 
+ DAST --- Running Application--- POST Deploy 
+ SCA ---- Dependencies/Libraries -----build /pre-deploy 
+ 
+ 
+ Live
+-----------
+
+
+   sast
+   dependency-scan ---- sca
+
+pipeline fail if
+     severity is high == found
+
+stop the build
+
+report the errors to the dev
+
+
+code --- build--sast --- test -- deploy
+
+
+sast checks:
+--------------
+ find the vulnerabilities in code
+ REST API
+ PCI,HIPAA, NIST, SOC2
+ check-List
+ 
+ 
+ 
+ 
+ CVE --- SCORE-
+SCA
+=======================================
+DEVSECOPS -- CICD
+COMMIT
+SAST
+SCA
+BUILD
+COTNAINERS
+DAST
+DEPLOY
+RUTIME
+  
+  
+------------------------------
+GET Complete info as phases in the ci pipeline 
 
 HANDLING ARTIFACTS AND Storing Artifacts -- Nexus/Jfrog
 
