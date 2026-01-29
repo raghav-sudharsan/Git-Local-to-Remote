@@ -799,5 +799,75 @@ docker run -it -p 8080:80 my-webapp
  image 
  ear 
  
+ 
+ 
+29/01/26: code quality-in build automation
+=============================================
+bugs
+code smells
+security issues
+style violations
+coverage
+duplication
+percentage
+
+CI Rule: if code quality is fails ---> merge must fail 
+ 
+ checkout the code 
+ compile 
+ unit test 
+ code quality analysis 
+ 
+ mvn validate:------->Enforcer
+     what is maven enforcer plug-in
+it enforces build-level rules
+
+what it checks:
+---------------
+ check the java versions
+ maven versions
+ dependency conflicts
+ banned dependencies
+ duplicate classes
+ snapshotusage
+
+ note: It prevents the environment drift and dependency chaos
+
+
+ 
+stage
+------
+mvn validate : ------------> Enforcer 
+compile : -----> checkstyly, PMD, spotbugs : mvn compile 
+
+ compile --- bytecode ---.class --- scan 
+ mvn 
+test: -------> jacoco : mvn jacoco:jacoco 
+verify:------> sonarQube
+install :----> final gate
+
+error
+------
+*Unable to locate Source XRef to link to -- DISABLED
+ mvn jxr:jxr 
+
+
+Owsapdependency -check
+-----------------------
+
+  mvn validate
+  mvn checkstyle: checkstyle
+  mvn findbugs:fidnbugs
+  mvn spotbugs : check
+  mvn pmd : pmd pmd : cpd
+  mvn jxr: jxr
+  mvn jacoco:prepare-agent test jacoco:report
+  mvn cobertura:cobertura 
+ 
+ 
+ https://github.com/spring-projects/spring-petclinic
+ 
+SonarQube
+----------
 
 
