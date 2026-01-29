@@ -744,6 +744,60 @@ GET Complete info as phases in the ci pipeline
 
 HANDLING ARTIFACTS AND Storing Artifacts -- Nexus/Jfrog
 
+
+
+
+
+
+28/01/26: demo-image project -***Important
+===============================================
+CI-Maven:
+----------
+
+k*
+
+1) we successfully generated jar -- java-archieves
+2) war----webarchieves
+3)image
+4) ear -- enterprise archieves
+
+maven with default-lifecyle -- project -- pom.xml -- mvn package
+mvn package: ---- > jar/war/ear/image --pom.xml --<package >
+
+
+         demo Project
+         =================
+code-->image
+
+maven+docker
+
+How to generate the build artifact as docker image by integratingmaven with docker?
+---------------------------------------------------------
+
+
+step1: generate the project code or take the GitHub repo code
+step2: add the docker plug-in to pom.xml
+      mvnrepository.com
+step3: add the configurations
+step4: add the stage for the docker
+step5: define all resoruces for the maven to interact with docker
+step6: Create dockerfile for creating a docker image 
+step7: add the tomcat-users.xml file at dockerfile 
+
+GitHub.com/sresrinivas
+mvn package docker:build
+
+docker images
+
+docker run -it -p 8080:80 my-webapp
+ EC2 -- security tab --sg -- inbound rule --custom tcp: --8080 --add 
+ 
+ go browser: ec2ip: 8080
+ 
+ jar 
+ war 
+ image 
+ ear 
  
 
 
