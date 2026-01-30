@@ -871,3 +871,60 @@ SonarQube
 ----------
 
 
+30/01/2026: Introduction to SonarQube:
+========================================
+*is a server
+*written in java
+*static code analysis
+*its purely scan the code with out executing-it
+* default port -- 9000
+*improving code quality and security
+* supports all programming lang-20+
+*DevSecOps ---- code level security-
+*code -- repo -- monorepo and multi-module project
+*plug-in in the cicd pipeline
+*cloud /opensource/enter-prise
+
+*code quality concepts:
+    mvn sonar:sonar
+
+*reduce the technical debt
+
+*detect bugs --logic and runtime issue 
+*detect code smell 
+*detect the security vulnerabilities 
+*measure the code coverage 
+*find or track the duplicate code 
+*coding standards
+ rules and rule profiles 
+ it helps to classify the issue by severity --which is blocker ,critical,major,minor 
+*Jenkins/jenkinsX/GitLab/githubactions/azuredevops/codepipeline
+*monolithic and microservices
+*track and test the new code and overall code quality
+*detect OWASP top 10 vulnerabilities 
+*use in cryptography usage 
+*identifies sql injection risks 
+* backen procees will save in H2 database 
+* it supports security hotspot
+* quality gates --pass/fail criteria 
+* gates: coverage ,bugs, vulnerabilities
+* 7-axis principle 
+* sonarway --java 
+
+****** Interview question ********
+       --------------------
+* what is the diff between quality profile cand quality gates
+
+  what to check -----pass/fail
+
+  rule ----threshold
+
+  code level -----pipeline level
+
+
+
+
+
+
+
+
