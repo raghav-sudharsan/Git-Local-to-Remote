@@ -922,9 +922,66 @@ SonarQube
   code level -----pipeline level
 
 
+03/02/2026: Sonarqube -Practical
+=================================
 
-
-
-
+SonarQube:
+sudo yum update -y
+     sudo yum install java-17-amazon-corretto -y
+    java --version
+	vi ~/.bash_profile
+	cd /opt/
+    curl -L -o sonarqube-10.6.0.92116.zip https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.6.0.92116.zip
+	curl -L -o sonarqube-10.6.0.92116.zip https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.6.0.92116.zip
+    ls
+    unzip sonarqube-10.6.0.92116.zip
+    clear
+    ls
+    mv sonarqube-10.6.0.92116 sonarqube
+	groupadd sonar
+    useradd -g sonar sonar
+    ls -la sonarqube  #all files accessable to root only 
+    su -sonar
+	whoami
+	cd /opt/ 
+	ls -la sonarqube
+exit	
+	chown -R sonar:sonar sonarqube  #from root
+	su sonar 
+	cd /opt/ 
+	la -la sonarqube  #permission will set to sonar 
+	exit
+	sudo chmod 755 /opt/sonarqube 
+	
+	su -sonar 
+	cd /opt 
+	ls -la sonarqube
+	 java --version 
+	 mvn --version 
+	  exit
+	 vi ~/.bash_profile      #from root 
+	   JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto.x86_64
+       M2_HOME=/opt/maven
+       M2=/opt/maven/bin
+       PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2_HOME:$M2
+	   
+	su -sonar 
+	vi ~/.bash_profile 
+	  JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto.x86_64
+       M2_HOME=/opt/maven
+       M2=/opt/maven/bin
+       PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2_HOME:$M2
+	 source ~/.bash_profile
+	 
+	 exit 
+	 su sonar 
+	 java --version 
+	 mvn --version
+	  
+    cd /opt/sonarqube/bin/linux-x86-64/
+   ./sonar.sh status
+    sh sonar.sh start
+    sudo sh sonar.sh start
+    sudo su - sonar
 
 
