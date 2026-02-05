@@ -985,3 +985,52 @@ exit
     sudo su - sonar
 
 
+
+05/02/26: Jfrog-Artifactory
+===========================
+common tools: 
+ jfrog, nexus, codeartfact(aws), azure artifacts, google
+artifacts, harbor, dockerhub, ecr, quay,
+
+multiple package formats in to one platform:
+
+JFRog Artifactory
+source code is in: git
+mvn package: ---- compiled outputs-jar/war/ear, images
+           : version,security scanning ,promote ,rollback, access -control
+mvn deploy 
+
+**its not manage source code, only manage binaries 
+
+Cloud Deployment
+****************
+SAAS -JFROG-Cloud 
+
+Default port :8081
+
+DEFAULT USERS:
+
+USERNAME: admin
+pwd: password
+
+github+codebuild+code-deploy+codepipeline+codeartifacts
+
+event-driven architecture: EDA+SERVER LESS ARCHITECTURE --- LAMBDA+CDK 
+
+MVN DEPLOY:  -WAR/IMAGE TO JFROG
+name
+version
+checksum
+users
+groups
+permssions
+build info ----->build numbers+pipeline link
+
+docker images
+
+
+
+
+		   
+
+
