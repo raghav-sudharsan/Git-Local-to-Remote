@@ -1029,6 +1029,59 @@ build info ----->build numbers+pipeline link
 docker images
 
 
+09/02/2026: Introduction to Jenkins 
+====================================
+*ci Server
+*cd -- continuous delivery
+*is a complete open source automationserver
+*written in java lang
+*plug-ins: 1800+
+*application pipelines/infrastructure/data pipelines
+
+Two versions: 
+ Jenkins 
+ JenkinsX --k8s --GITOPS 
+ 
+used to workflow automation 
+*at on-premise and cloud
+*platform independent : windows/unix/Linux/mc/container
+/k8s
+*it supports multiple programming languages/scrtipting
+languages/ db's
+*api/cli/webui/thru automation
+ Port - 8080
+ hpi -- hutson plugable interface 
+ supports multiple repositories: 
+ 
+*cicd pipeline: pipeline as code -- Jenkinsfile
+*declarative pipeline
+*scripted pipeline
+*can access remotely
+ supports various app server
+*war/download Jenkins repo/docker /k8s
+supports upstream and downstream job
+sequential and parallely
+ trigger the job at schedule time: cronjobs-pull
+ supports webhooks+ github+jira+docker
+*build/test/deploy
+*supports master slave architecture
+
+* is event-driven --- push -- trigger the build -- push
+* Jenkins user/admin/root user
+*rabitmq/actvivemq
+*kafka
+*jenkins+sonarqube+jfrog+junit+testng+nuniy+postman
+* HA+SCalablity+DR+administraton+security+montioring
+
+
+
+*Jenkins on Ec2 :--- instance type --- jdk11/17
+*azuredevops/GitLab/githubactions/tekton
+*Jenkins is hard and but powerful
+*handling complex enterprise workflows
+ supports shared librries 
+ manages quese and executors 
+ ui and restapi 
 
 
 		   
