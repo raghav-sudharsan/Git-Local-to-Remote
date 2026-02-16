@@ -1,0 +1,69 @@
+
+Java installation and setup
+***************************
+java -version
+sudo yum install java-1.8.0-openjdk -y
+java -version
+readlink -f /usr/bin/java
+
+  sudo tee /etc/profile.d/java.sh << 'EOF'
+  export JAVA_HOME=/usr/lib/jvm/java-1.8.0-amazon-corretto.x86_64
+  export PATH=$PATH:$JAVA_HOME/bin
+  EOF
+  
+source /etc/profile
+  
+Tomcat deployment:
+******************
+ sudo useradd -m -U -d /opt/tomcat -s /bin/false tomcat
+ 
+  What this does:
+   tomcat      → creates a dedicated user
+   /opt/tomcat → home directory 
+   /bin/false  → user cannot login (security)
+   -U          → create group
+   
+id tomacat 
+
+cd /tmp
+curl -L -o apache-tomcat-9.0.96.tar.gz https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.96/bin/apache-tomcat-9.0.96.tar.gz
+file apache-tomcat-9.0.96.tar.gz  #checking downloaded gzip
+sudo tar -xzf apache-tomcat-9.0.96.tar.gz -C /opt/tomcat --strip-components=1
+ls /opt/tomcat
+sha256sum apache-tomcat-9.0.96.tar.gz   #checksum and file type 
+sudo chown -R tomcat:tomcat /opt/tomcat
+sudo chmod -R 755 /opt/tomcat
+
+   sudo tee /etc/systemd/system/tomcat.service << 'EOF'
+   
+   [Unit]
+   Description=Apache Tomcat web Application container
+   
+   After=network.target
+   
+   [Service]
+   Type=forking
+   
+   User=tomcat
+   Group=tomcat
+   
+   Environment="Java_HOME=/usr/lib/jvm/java-1.8.0-amazon-corretto.x86_64"
+   Environment="CATALINA_PID=/opt/tomcat/temp/tomcat.pid"
+   Environment="CATALINA_HOME=/opt/tomcat"
+   Environment="CATALINA_BASE=/opt/tomcat"
+   ExecStart=/opt/tomcat/bin/startup.sh
+   ExecStop=/opt/tomcat/bin/shutdown.sh
+   
+   Restart=on-failure
+   
+   [Install]
+   WantedBy=multi-user.target
+   EOF
+
+sudo systemctl daemon-reload
+sudo systemctl start tomcat
+sudo systemctl status tomcat
+ps -ef | grep tomcat
+ps -p 78700 -f
+ss -tulnp | grep 8080
+netstat -tulnp | grep java
