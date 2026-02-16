@@ -239,7 +239,7 @@ file saved locarion
 
 
 
-17) 02/11  -
+17) 10/30   02/11  -
 -----------------------
 
 use su & sudo
@@ -249,11 +249,24 @@ use su & sudo
  
  
  sudo
- su    # substitute user or switch user including root but require passwd for target one
+ su        # substitute user or switch user including root but require passwd for target one
  sudo -i   #directly switch to root shell
  
-user switch:  Su           sudo
-password:    require 
+user switch:  Su                 sudo
+password:    require root pass   current user password 
+
+ sudo useradd raghav  - to create the user 
+ sudo passwd raghav   - to change the password
+ 
+ su raghav   #it will switch the user but low privilage 
+ pwd         #it will point to /home/ec2-user
+ 
+ su - raghav  #assign root privilage to user id 
+ 
+ su root  #switch to root 
+ sudo -i  #switch to root 
+ sudo su - #switch to root 
+ 
 
 
 
