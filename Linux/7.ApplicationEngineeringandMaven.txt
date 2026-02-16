@@ -1082,6 +1082,52 @@ sequential and parallely
  supports shared librries 
  manages quese and executors 
  ui and restapi 
+ 
+ 
+ 
+12/02/2026: Jenkins configuration 
+===================================
+1800 plug-ins
+jobs
+Jenkins user
+jenkins-admin
+8080
+written in java
+jdk
+pipeline
+groovy scripting
+master and slave concepts
+job-sequentially and parallely
+
+ui
+cli
+restapi-call
+
+
+16/02/2025:  Jenkins  -EC2 - large -vm
+====================================
+is not a deployment automation tool
+is CI Server
+written in java
+plug-ins -- 1800+
+pipeline as a code
+jobs
+ freestyle
+ pipeline  -------jenkins --
+ maven project
+ multi-branch pipeline
+ multi-job
+ github-organi
+  
+automate the workflow
+
+Jenkins user
+Jenkins administrators:
+     TOOLS/SECURITY/MONITORING/BACKUP
+/MASTER/CLOUD-NODES/user/alerts/
+follows the master and salve concept
+node: windows/Linux/mac/uix/ec2/ecs/eks
+master machine :--- server -- linuxserver.
 
 
 		   
