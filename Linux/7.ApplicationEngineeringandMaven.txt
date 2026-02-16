@@ -1,0 +1,1135 @@
+07/01/2026: Application Engineering 
+====================================
+working for the applications/environments/schedules/deliveries/client not for the tools
+
+ *design
+ *build
+ *structured
+ *configured
+ *deployed
+ *reliable
+ *scalable
+ *testable
+ *automated under diff environment
+
+health/logs/metrics
+
+
+Key reasons start at application engineering:
+----------------------------------------------
+ 1. Security starts at application configurations 
+ 2. Weak app design 
+ 3. CI/CD pipelines operated on applications not tools 
+ 4. maven+docker -- image 
+ 
+What to focus in application:
+------------------------------
+ Application fundamentals:
+  language & runtime 
+  entry point 
+  build system 
+  
+Application life cycle:
+-----------------------
+  startup   # init - like initalize pre service before start the main service 
+  shutdown behavior 
+  failure modes 
+  retry logic 
+  graceful termination
+  
+Configuration model:
+---------------------
+ environment variables
+ config files 
+ .kube/ configuration module
+ secret handling 
+ runtime overrides 
+ 
+Dependency model:
+-----------------
+ Database 
+ external service 
+ caches
+ message brokers
+ 
+Observability:
+--------------
+ logs 
+ metrics 
+ health checks 
+ error handling
+
+1. Application structure and design 
+------------------------------------
+ 1. Know the application entry points : -spring boot, node index.js, main 
+   * understand how the app stops 
+ 2. build and packing 
+ 
+ 
+ 
+07/01/2026: Introduction to Maven
+===================================
+what is maven: 
+-------------- 
+ is a build tool 
+ used to automate the build process  
+ is written in java 
+ platform independent 
+ platfom: OS+Processor 
+ opensource 
+ follows the conventions rather than configuration
+ 
+ require a build file: ---xml based 
+ build file:--> pom.xml 
+ what is pom --> project object model 
+  used for project management purpose  
+  used for reporting 
+  
+ have its own predefined life cycle 
+ defines the order of exxecution 
+ supports the order of lifecycyles 
+  default 
+  clean 
+  site 
+  
+ *lifecycle -- phase -->plugins --> goals
+ *Dependency management tool 
+ Repository : local, remote, central repo: mvnreposotory.cm
+ build cache 
+ portability of the build  
+
+ dev/qa/uat/sit  -profiles
+ maven with +CI SERVER tools
+ maven+git+svn+codecommit+azurerepo
+ maven+docker+ansible+k8s+
+ maven cli ->mvn
+ maven+multiple server
+ can do deployment, undepployment , rdeployment
+ 
+ maven proper project tree structure
+
+ Java architecture 
+ 
+ 
+09/01/2026: Maven - regular terms used in DevOps
+==================================================
+CI-Server 
+---------- 
+ Jenkins 
+ GitLab ----> Build file ---Java--> pom.xml
+ githubactions 
+ azuredevops 
+ pom -->Project object model 
+ build automation 
+ dependency management 
+ 
+Maven:
+-----
+
+build tool:
+-----------
+order of build execution
+3 life cycles :---- default/clean/site
+
+artifacts ---- final output ----- > jar/war/ear/image
+
+what is dependency: 
+------------------- 
+ software dependency 
+  xml elements  --- gav properties  #group ID ,srtifact ID, version 
+  
+dependency managemnnt
+---------------------
+
+artifact 
+---------
+ output ---->war/ear/image/jar 
+ artifactID+code----  /op ----- artifacts -- jar
+
+version:
+--------- 
+ 1. snapshot 
+ 2. release 
+ 
+snapshot: 
+---------- 
+ development version ---still changing, not final 
+ 
+release:
+----------
+ stable and production -ready version 
+ 
+packaging:
+-----------
+ format of artifact --output 
+ 
+what is pom.xml:
+---------------
+ pom.xml 
+ 
+ build file/maven configuration file 
+ 
+repository :
+------------
+ storage location for artifacts and dependencies
+ 
+ 
+nexus/jfrog
+image --- dockerhub/ecr/acr/
+
+local repository:
+-------------------:
+
+~/.m2/repository
+
+remote repository:
+------------------------:
+
+custom repository hosted inside the company/organization
+
+     nexus/jfrog-artifacttory/dockerhub/ecr/acr
+
+
+build lifecycle:
+-----------------
+
+lifecycle --- phases ----- plug-ins --- goals
+
+phases :
+-----------:
+
+collections of predefined steps that will help to maintain the order of build execution
+
+   default:---23 
+   site:
+   clean
+
+plug-in:
+----------
+ extension to maven used to perform task 
+ 
+
+Maven configration: 
+-------------------
+ cd opt/
+ yum git  -y 
+ git clone ------  #
+ mvn validate 
+ mvn compile 
+ mvn test 
+ mvn package 
+ 
+buiod ssection
+---------------
+ 
+what is dependency tree: 
+-------------------------
+  
+what is metadata:
+----------------
+ version 
+ packages 
+ checksums
+ 
+ 
+--pending 
+
+
+
+
+========================================
+10/01/2026: what is archetype in maven 
+=======================================
+ it is a project templete generator
+ create a project with predefined structure, filels, directories and configurations 
+ 
+ understand the application architype
+ -------------------------------------
+  desktop application 
+  microservices 
+  web application 
+  enter-prise
+  
+ when run the archetype , maven creates 
+  - src/main/java ----------> development code 
+    src/main/resources 
+	src/test/java   --------> testing code: ----> UNIT Testcases/IT 
+	
+why maven Introduced Archetype:
+--------------------------------
+ Project consistency 
+ reproducibility 
+ standards 
+ faster project bootstrapping 
+ 
+how many types of archetypes: 
+------------------------------
+ 1. official maven archetype 
+ 2. framework specific archetypes 
+     spring boot 
+	 micronut
+	 camel 
+	 quarkus 
+	 Jakarta EE
+ 3. coustom corporate archetype 
+ 
+Why devops engineers need to know archetype: 
+----------------------------------------------
+ Must understand project standards --CI/CD 
+ 
+ Automation at scale 
+ 
+ devops must creates organization templetes 
+   microservices templetes 
+   testing templete
+   docker templete 
+   CI/CD 
+   k8s deployment 
+   
+ enables the GITOPS + Platform engineering 
+ 
+ archetype + helm + k8s + argocd 
+ security and complience 
+ dependency management 
+ dependency analysis
+ 
+
+
+==========================================
+12/01/2026: what is acrchetype in maven
+=========================================
+Project templete --- create structure 
+dev---push the code ---github --integrate in to CI Server --- run the CI pipeline --checkout the code 
+---> verify the code is having proper mandate files or not -- build file--pom
+
+ mvn archtype:generate -DgroupId=com.srini.eapp -DartifactId
+
+ validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile,
+process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources,
+test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test,
+post-integration-test, verify, install, deploy
+
+
+what is source:
+----------------
+ all java releate files that need to compiled in to byte code--.class --
+ build = collection of .class 
+ 
+ what are resource in maven:
+ ---------------------------- 
+ non-java files needed by the application during the runtime 
+ 
+ 
+ 
+ 
+19/01/2026: Introduction to pom.xml:
+===================================== 
+ it is a build file 
+ is a configuration file 
+ dependencies 
+ build plugings 
+ 
+ project versions: major.minor.patch 
+                 : major.minor.build 
+				 :major.minor.hotfix 
+ repository details: 
+   :snapshot repositories 
+   :release repositories 
+   
+ profiles: build profiles 
+ ci/cd integration 
+ servers:tomcat/weblogic/websphere/jboss
+  
+ Webapplication
+  enterprise: ----------> multi-module integration 
+  
+  package: jar/war/ear 
+  codecoverage plug-in : cobertura/pmd/checkstyle/jacoco/jxr 
+  
+  sast: -- sonarQube
+  
+ test result
+ distrubution management
+ binary artifactory integration: Jfrog /nexus 
+ 
+ mvn install 
+ mvn deploy 
+ 
+ maven+docker  --->image -- push the images -- dockerhub
+pom. xml ---> docker plug-ins :--- mvn docer:build
+war
+
+maven+github/bitbucket 
+release management 
+
+  
+ Three TYPES OF pom: Project Object Modle
+-------------------------------------
+
+ 1. Parent pom:  aggregator POM     #widely used in microservice architecture 
+     
+	 
+     multi-modules 
+     microservices 
+     ci/cd build orchestration 
+     
+     service 1: ---------jar+pom 
+     s2 : -----------------jar 
+     s3 : ----------------jar 
+     
+     **should know how to deploy monolithic and micro dervices application ****
+
+ 2. child pom:
+ -------------
+ 
+ 
+ 3.super pom:
+ -----------
+  maven build on top of apache
+  
+  apache --- convention   ---implicit ---- super pom 
+ 
+ 
+  ==========================
+   POM Elements
+   ---------------------------
+    * Project info
+    * maven coordinates 
+    * versions 
+    * packages 
+    * dependencies 
+    * distributed management [nexus or jfrog]
+    * plug-ins 
+    * repositories 
+    * profiles 
+    * sast 
+    * deployment automation 
+    * source code management integration 
+    * multi-modules 
+   ---------------------------------------
+   
+ * whith in pom.xml - 2 plugins 
+ ------------------------------
+   build plug-ins 
+   reporting plug-ins 
+   
+-complpete 
+ 
+ 
+20/01/2026: Deploying sample hello-world application in to tomcat using pom.xml 
+===============================================
+
+ launch virtual server :---- ec2-redhat/amazon
+ login as root user: sudo su -
+ move to opt directory: cd /opt
+ install and configure java:
+   JDK: JAVA DEVELOPMENT KIT
+        JAVAC ---COMPILE the code ---.class ---Bytecode
+   JRE: JAVA RUNTIME ENVIRONMENT --- JVM---.Classs
+ 
+ CI --Apps --JavaBased 
+ 
+ compile -->mvn compile -->main and test code -->java compiler -->.class (byte code) ---> JRE 
+
+
+
+ sudo su
+ cd /opt 
+ yum install -y java-17*
+ java -version 
+ find /usr/lib/jvm/java-17* | head -n 3
+ vi ~/.bash_profile
+    JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.50.amzn1.x86_64
+ wget https://dlcdn.apache.org/maven/maven-3/3.9.12/binaries/apache-maven-3.9.12-bin.tar.gz
+ ls 
+ tar -xzvf apache-maven-3.9.12-bin.tar.gz   #(tar -tape archieves and gz - gunzip)
+ mv apache-maven-3.9.12/ maven 
+  #adding mavn home path 
+ vi ~/.bash_profile
+   M2_HOME=/opt/maven
+   M2=/opt/maven/bin
+   PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2:$M2_HOME
+
+    export PATH
+ source ~/.bash_profile  #source -to make the changes permanent
+ java -version 
+ mvn --version   (maven supports archetype)
+ mvn archetype:generate -DgroupId=com.pro.app -DartifactId=webpro -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+ 
+        [root@ip-172-31-16-250 opt]# ls
+       aws  maven  webpro
+       [root@ip-172-31-16-250 opt]# cd webpro/
+       [root@ip-172-31-16-250 webpro]# ls
+       pom.xml  src
+       [root@ip-172-31-16-250 webpro]# cd src/
+       [root@ip-172-31-16-250 src]# ls
+       main
+       [root@ip-172-31-16-250 src]# cd main/
+       [root@ip-172-31-16-250 main]# ls
+       resources  webapp
+       [root@ip-172-31-16-250 main]# cd webapp/
+       [root@ip-172-31-16-250 webapp]# ls
+       WEB-INF  index.jsp
+       [root@ip-172-31-16-250 webapp]#
+
+ cd webpro/   #pom.xml should exist 
+ mvn package  #webpro.war will be create
+
+#instaling apache-tomcat
+------------------- 
+ wget https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.93/bin/apache-tomcat-7.0.93.tar.gz
+ tar -xzvf  apache-tomcat (x-extract z-folder v-verbose on screen f-all files)
+ cd /opt/tomcat/conf/   #tom cat credentials and other important files are stored
+ 
+ 
+ Difference btw Monolithic and Microservices 
+  Monolithic  - Everything Manuall
+  Microservices  - some of comes with build in 
+  
+ current action 
+  mnv package --> war (web archive(collection of .class files )) --> can access application by --> place war in Web server (tomcat )
+ 
+ Time: 1.0.0.18
+ 
+ 
+ 
+21/01/2026: Introduction to Build profiles in Maven:
+=====================================================
+
+ *build profile is a xml element in pom.xml 
+  application need to deploy for different environment 
+  to achieve build portability 
+  to customize 
+    jvm args 
+    plug-in config 
+    dependencies 
+    resource filtering 
+    build properties 
+    environment variables 
+    output directory 
+  to change the build behaviour 
+   UAT --->
+   QA ---> 
+   prod --> 
+   
+   
+  * acheive 0 manual switchich to profiles 
+  
+  types:
+   pom.xml
+   setting.xml 
+   
+what are the diff activation types:
+------------------------------------
+
+
+22/1/2026:
+============
+
+dependency management
+-----------------------
+ Process of 
+          declaring 
+		  downloading
+		  versioningorganize
+		  maintain the libraries
+		  
+ spring-boot:
+ --------------
+    MySQL driver 
+	spring web 
+	logging API 
+	ackson JSON 
+ .JAR FILES	
+	
+
+dependency analysis
+depdency resolution:
+--------------------
+ Dependency Management
+   * Makesure exact build version there are not 
+   * version failure 
+   * runtime failure 
+   * security vulnerabilities 
+   * environment 
+   * reproducibility issues 
+ 
+who will take care?
+-----------------------
+ developer : -- declare the dependencies 
+ build tool: -- resolves++deownloads 
+ devops: cashing/build/security 
+ 
+DevSecOps: --track the cves,version,policies 
+
+why should devops care:
+------------------------
+ sca 
+ cve 
+ SBOM 
+ 
+Where dependency available: 
+---------------------------- 
+ dependency 
+ compile : compile+test+runtime ---- yes ----springboot 
+ 
+ Provided: compile ------------- package 
+ 
+ runtime: runtime_test ------ yes ------jdbs driver 
+ 
+ test :  test ---------- no ------ junit
+ 
+ system : compiletime  ------ local 
+ import  dependencymanagement  --- no -----BOM 
+ 
+ <dependencies>
+           <g>
+		   <a>
+		   <v>
+		     <scope>
+			
+			
+tools:
+------ 
+ build tools: maven, gradle ,npm, pip 
+ repos : -------- nexus/artifact,jfrog 
+ 
+ 
+ 
+ 
+types of dependencies
+what is dependency scope
+what are the diff steps involved to handle dependencies
+
+*integration of testcase execution using jun
+ importance of sast,owasp dependency analysis
+*code-coverage and code quality
+
+*analysis of test reports
+
+
+
+23/01/26:
+============
+
+mvn dependency:analyze 
+mvn dependency:tree:
+----------------------
+ detect the conflicts 
+ 
+mvn dependency:resolve:
+--------------------------
+ download all dependencies 
+ 
+resolce
+
+
+
+
+27/01/26:
+========================
+
+SAST:static application security testing 
+
+   checks the source code
+   bytecode --- java -- compile ---. class --- bytecode
+   binaries without running the application.
+
+code -- Jbuild---sast --- test -- deploy
+
+
+sast checks:
+-------------
+FIND THE VULNERABILITIES IN CODE 
+
+ sql injection 
+ xss---cross--site scripting
+ unsafe deserializaion
+ command injection 
+ haded corded secret /token 
+ insecure cryoto usage
+ buffer overflow
+ 
+
+
+maven+sonarqube+jenkins: --mvn sonar:sonar
+
+sast tools:
+------------
+ sonarQube
+ checkmarx
+ varcode -------------------enterprise/cloud 
+ fortify 
+ gitlab sast 
+ github codeQ1
+ 
+Opensource:
+------------
+ semgrep
+ bandit
+ findsecbugs
+ ESLintsecurity plug-ins 
+ 
+when sast runs:
+----------------
+ every PUSH
+ every PR
+ Nightly scan the code on master/main branch 
+ Full scans before release
+ 
+ 
+DevSecOps
+---------
+
+Shift-left principle:
+-------------------------
+ fix the vulnarabilities as early as possible
+ 
+ code -----SAST 
+ build --------SCA[Software composition Analysis]
+ runtime --------DAST 
+ Production--------CWPP/WAF 
+ 
+ SAST vs DAST vs SCA:
+ ========================
+ SAST ---source code --PRE Build 
+ DAST --- Running Application--- POST Deploy 
+ SCA ---- Dependencies/Libraries -----build /pre-deploy 
+ 
+ 
+ Live
+-----------
+
+
+   sast
+   dependency-scan ---- sca
+
+pipeline fail if
+     severity is high == found
+
+stop the build
+
+report the errors to the dev
+
+
+code --- build--sast --- test -- deploy
+
+
+sast checks:
+--------------
+ find the vulnerabilities in code
+ REST API
+ PCI,HIPAA, NIST, SOC2
+ check-List
+ 
+ 
+ 
+ 
+ CVE --- SCORE-
+SCA
+=======================================
+DEVSECOPS -- CICD
+COMMIT
+SAST
+SCA
+BUILD
+COTNAINERS
+DAST
+DEPLOY
+RUTIME
+  
+  
+------------------------------
+GET Complete info as phases in the ci pipeline 
+
+HANDLING ARTIFACTS AND Storing Artifacts -- Nexus/Jfrog
+
+
+
+
+
+
+28/01/26: demo-image project -***Important
+===============================================
+CI-Maven:
+----------
+
+k*
+
+1) we successfully generated jar -- java-archieves
+2) war----webarchieves
+3)image
+4) ear -- enterprise archieves
+
+maven with default-lifecyle -- project -- pom.xml -- mvn package
+mvn package: ---- > jar/war/ear/image --pom.xml --<package >
+
+
+         demo Project
+         =================
+code-->image
+
+maven+docker
+
+How to generate the build artifact as docker image by integratingmaven with docker?
+---------------------------------------------------------
+
+
+step1: generate the project code or take the GitHub repo code
+step2: add the docker plug-in to pom.xml
+      mvnrepository.com
+step3: add the configurations
+step4: add the stage for the docker
+step5: define all resoruces for the maven to interact with docker
+step6: Create dockerfile for creating a docker image 
+step7: add the tomcat-users.xml file at dockerfile 
+
+GitHub.com/sresrinivas
+mvn package docker:build
+
+docker images
+
+docker run -it -p 8080:80 my-webapp
+ EC2 -- security tab --sg -- inbound rule --custom tcp: --8080 --add 
+ 
+ go browser: ec2ip: 8080
+ 
+ jar 
+ war 
+ image 
+ ear 
+ 
+ 
+ 
+29/01/26: code quality-in build automation
+=============================================
+bugs
+code smells
+security issues
+style violations
+coverage
+duplication
+percentage
+
+CI Rule: if code quality is fails ---> merge must fail 
+ 
+ checkout the code 
+ compile 
+ unit test 
+ code quality analysis 
+ 
+ mvn validate:------->Enforcer
+     what is maven enforcer plug-in
+it enforces build-level rules
+
+what it checks:
+---------------
+ check the java versions
+ maven versions
+ dependency conflicts
+ banned dependencies
+ duplicate classes
+ snapshotusage
+
+ note: It prevents the environment drift and dependency chaos
+
+
+ 
+stage
+------
+mvn validate : ------------> Enforcer 
+compile : -----> checkstyly, PMD, spotbugs : mvn compile 
+
+ compile --- bytecode ---.class --- scan 
+ mvn 
+test: -------> jacoco : mvn jacoco:jacoco 
+verify:------> sonarQube
+install :----> final gate
+
+error
+------
+*Unable to locate Source XRef to link to -- DISABLED
+ mvn jxr:jxr 
+
+
+Owsapdependency -check
+-----------------------
+
+  mvn validate
+  mvn checkstyle: checkstyle
+  mvn findbugs:fidnbugs
+  mvn spotbugs : check
+  mvn pmd : pmd pmd : cpd
+  mvn jxr: jxr
+  mvn jacoco:prepare-agent test jacoco:report
+  mvn cobertura:cobertura 
+ 
+ 
+ https://github.com/spring-projects/spring-petclinic
+ 
+SonarQube
+----------
+
+
+30/01/2026: Introduction to SonarQube:
+========================================
+*is a server
+*written in java
+*static code analysis
+*its purely scan the code with out executing-it
+* default port -- 9000
+*improving code quality and security
+* supports all programming lang-20+
+*DevSecOps ---- code level security-
+*code -- repo -- monorepo and multi-module project
+*plug-in in the cicd pipeline
+*cloud /opensource/enter-prise
+
+*code quality concepts:
+    mvn sonar:sonar
+
+*reduce the technical debt
+
+*detect bugs --logic and runtime issue 
+*detect code smell 
+*detect the security vulnerabilities 
+*measure the code coverage 
+*find or track the duplicate code 
+*coding standards
+ rules and rule profiles 
+ it helps to classify the issue by severity --which is blocker ,critical,major,minor 
+*Jenkins/jenkinsX/GitLab/githubactions/azuredevops/codepipeline
+*monolithic and microservices
+*track and test the new code and overall code quality
+*detect OWASP top 10 vulnerabilities 
+*use in cryptography usage 
+*identifies sql injection risks 
+* backen procees will save in H2 database 
+* it supports security hotspot
+* quality gates --pass/fail criteria 
+* gates: coverage ,bugs, vulnerabilities
+* 7-axis principle 
+* sonarway --java 
+
+****** Interview question ********
+       --------------------
+* what is the diff between quality profile cand quality gates
+
+  what to check -----pass/fail
+
+  rule ----threshold
+
+  code level -----pipeline level
+
+
+03/02/2026: Sonarqube -Practical
+=================================
+
+SonarQube:
+sudo yum update -y
+     sudo yum install java-17-amazon-corretto -y
+    java --version
+	vi ~/.bash_profile
+	cd /opt/
+    curl -L -o sonarqube-10.6.0.92116.zip https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.6.0.92116.zip
+	curl -L -o sonarqube-10.6.0.92116.zip https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.6.0.92116.zip
+    ls
+    unzip sonarqube-10.6.0.92116.zip
+    clear
+    ls
+    mv sonarqube-10.6.0.92116 sonarqube
+	groupadd sonar
+    useradd -g sonar sonar
+    ls -la sonarqube  #all files accessable to root only 
+    su -sonar
+	whoami
+	cd /opt/ 
+	ls -la sonarqube
+exit	
+	chown -R sonar:sonar sonarqube  #from root
+	su sonar 
+	cd /opt/ 
+	la -la sonarqube  #permission will set to sonar 
+	exit
+	sudo chmod 755 /opt/sonarqube 
+	
+	su -sonar 
+	cd /opt 
+	ls -la sonarqube
+	 java --version 
+	 mvn --version 
+	  exit
+	 vi ~/.bash_profile      #from root 
+	   JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto.x86_64
+       M2_HOME=/opt/maven
+       M2=/opt/maven/bin
+       PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2_HOME:$M2
+	   
+	su -sonar 
+	vi ~/.bash_profile 
+	  JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto.x86_64
+       M2_HOME=/opt/maven
+       M2=/opt/maven/bin
+       PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2_HOME:$M2
+	 source ~/.bash_profile
+	 
+	 exit 
+	 su sonar 
+	 java --version 
+	 mvn --version
+	  
+    cd /opt/sonarqube/bin/linux-x86-64/
+   ./sonar.sh status
+    sh sonar.sh start
+    sudo sh sonar.sh start
+    sudo su - sonar
+
+
+
+05/02/26: Jfrog-Artifactory
+===========================
+common tools: 
+ jfrog, nexus, codeartfact(aws), azure artifacts, google
+artifacts, harbor, dockerhub, ecr, quay,
+
+multiple package formats in to one platform:
+
+JFRog Artifactory
+source code is in: git
+mvn package: ---- compiled outputs-jar/war/ear, images
+           : version,security scanning ,promote ,rollback, access -control
+mvn deploy 
+
+**its not manage source code, only manage binaries 
+
+Cloud Deployment
+****************
+SAAS -JFROG-Cloud 
+
+Default port :8081
+
+DEFAULT USERS:
+
+USERNAME: admin
+pwd: password
+
+github+codebuild+code-deploy+codepipeline+codeartifacts
+
+event-driven architecture: EDA+SERVER LESS ARCHITECTURE --- LAMBDA+CDK 
+
+MVN DEPLOY:  -WAR/IMAGE TO JFROG
+name
+version
+checksum
+users
+groups
+permssions
+build info ----->build numbers+pipeline link
+
+docker images
+
+
+09/02/2026: Introduction to Jenkins 
+====================================
+*ci Server
+*cd -- continuous delivery
+*is a complete open source automationserver
+*written in java lang
+*plug-ins: 1800+
+*application pipelines/infrastructure/data pipelines
+
+Two versions: 
+ Jenkins 
+ JenkinsX --k8s --GITOPS 
+ 
+used to workflow automation 
+*at on-premise and cloud
+*platform independent : windows/unix/Linux/mc/container
+/k8s
+*it supports multiple programming languages/scrtipting
+languages/ db's
+*api/cli/webui/thru automation
+ Port - 8080
+ hpi -- hutson plugable interface 
+ supports multiple repositories: 
+ 
+*cicd pipeline: pipeline as code -- Jenkinsfile
+*declarative pipeline
+*scripted pipeline
+*can access remotely
+ supports various app server
+*war/download Jenkins repo/docker /k8s
+supports upstream and downstream job
+sequential and parallely
+ trigger the job at schedule time: cronjobs-pull
+ supports webhooks+ github+jira+docker
+*build/test/deploy
+*supports master slave architecture
+
+* is event-driven --- push -- trigger the build -- push
+* Jenkins user/admin/root user
+*rabitmq/actvivemq
+*kafka
+*jenkins+sonarqube+jfrog+junit+testng+nuniy+postman
+* HA+SCalablity+DR+administraton+security+montioring
+
+
+
+*Jenkins on Ec2 :--- instance type --- jdk11/17
+*azuredevops/GitLab/githubactions/tekton
+*Jenkins is hard and but powerful
+*handling complex enterprise workflows
+ supports shared librries 
+ manages quese and executors 
+ ui and restapi 
+ 
+ 
+ 
+12/02/2026: Jenkins configuration 
+===================================
+1800 plug-ins
+jobs
+Jenkins user
+jenkins-admin
+8080
+written in java
+jdk
+pipeline
+groovy scripting
+master and slave concepts
+job-sequentially and parallely
+
+ui
+cli
+restapi-call
+
+
+16/02/2025:  Jenkins  -EC2 - large -vm
+====================================
+is not a deployment automation tool
+is CI Server
+written in java
+plug-ins -- 1800+
+pipeline as a code
+jobs
+ freestyle
+ pipeline  -------jenkins --
+ maven project
+ multi-branch pipeline
+ multi-job
+ github-organi
+  
+automate the workflow
+
+Jenkins user
+Jenkins administrators:
+     TOOLS/SECURITY/MONITORING/BACKUP
+/MASTER/CLOUD-NODES/user/alerts/
+follows the master and salve concept
+node: windows/Linux/mac/uix/ec2/ecs/eks
+master machine :--- server -- linuxserver.
+
+
+		   
+
+

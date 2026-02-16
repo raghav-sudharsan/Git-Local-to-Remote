@@ -80,7 +80,7 @@ dvcs: distributed version control system:GIT
 4) branch mapping
 5) version history
 6) with out overriding can collaborate with others
-7)rollback
+7) rollback
 8) pipelines, terraform-iac file
 9) release management
 
@@ -407,7 +407,781 @@ description
   
 CI -first steps 
   code checkout --> Dependency analysis --> code compile 
-  
-  
+ 
 
+ 
+30/12/2025: Github-action
+============================
+* GitHub/bitbuckey/GitLab/code commit/azurerepo
+
+*what are the github-actions: 
+------------------------------
+ is ci/cd platform
+ is a kind automation tool
+ used to automate work-flow --- when something happens in repo-need to automate that flow
+ yaml-based flow
+  
+*Multiple things are happen-something --> events
+  event: --> PR 
+        create the branch 
+	    any issues
+	    code push 
+	    merged 
+	    release 
+* Must be inside the repository 
+* Path: githubrepo/.GitHub/workflows/demo.yaml 
+* Workflows 
+* workflows are defined in yaml file 
+* every workflows has a name  
+* workflow is triggered by one or more event 
+* workflow contains jobs
+    collections of task is jobs 
+* Jobs are running on runners : - self-hosted runners 
+
+* types of runners in GitHub:
+----------------------------- 
+1. github-hosted runners 
+   vm : ubuntu,windows,mac 
+   run-on: ubuntu-latest 
+   
+2. Self-hosted runners 
+   can run on our servers/vms/cloud instances  
+   
+3. Organization-level runners 
+    large-level 
+	large enterprises 
+	multiple-team using CI Infra 
+	
+4. repository level-runners 
+5. grouped runners: 
+     logical grouping of sel-hosted runners 
+6. ephemeral self-hosted runners 
+7. large/high -performance runner --paid
+
+
+flow: 
+====== 
+ .Github/workflows/demo.yam --jobs --step --github runners 
+ 
+--pending 
+
+
+
+31-12-2025: GitHubaction
+============================
+ what is githubaction
+ --------------------
+ is a workflow 
+ 
+ workflow structure 
+ ------------------ 
+  login asgithubuser --> select your repo --actions --> name.yaml 
+  
+#sampl yml
+--------------
+name: Sudharsan first workflow
+on: push
+jobs:
+  hello-job:
+    runs-on: ubuntu-latest
+    steps:
+     - name: Print Hi Sudharsan
+       run: echo "first workflow success"
+
+checkoutrepo.yml 
+----------------- 
+ name: Chekout code
+ on: push 
+ jobs: 
+   checkout-job:
+      runs-on: ubuntu-latest 
+	  steps: 
+	    - name: checkout repo 
+		  uses: action/checkout@v4   #under action/ checkout-version4 - predefined  #checkout is function , it will clone the code automatically
+		- name: print all files 
+		  run: ls -la 
+
+
+
+
+name: Run Linux Commands
+on: push
+jobs:
+  shell-job:
+     runs-on: ubuntu-latest
+     steps:
+       - name: Run commands
+         run: |                    #| - pipe symbol, Allows multi-;ine shell commands
+                echo "welcome to github-action"
+                pwd
+                whoami
+                echo "list some files"
+                ls
+
+ | --> Allows multi-;ine shell commands 
+
+02/01/2026: GitHub Action Project
+================================== 
+ Build github-actions -workflow -to deploye web application to tomcatserver:
+ ------------------------------------------------
+ 
+ Seen how to generate the package using Java+maven via githubactions 
+
+ step1: Create Ec2 Instance
+ step2: download and install tomcat server on ec2-server
+ step3: lets unzip/untar the tomcat directory
+ step4: try to configure the tomcat-user
+ step5: start the tomcat server
+ step6: access the tomcatsever-ui
+ step7: build the githubactions
+ step8: run the work-flow to deploy war to remote server-mumbai-
+ 
+ 
+
+ 
+5/01/2026: Github-action -Project 
+==================================
+GitHub : https://github.com/sresrinivas/Ebusiness.git
+
+build workflow for the following actions:
+-------------------------------------------
+ 1) raise the PR
+ 2) review the PR
+ 3) Perform Merging
+ 4) if any conflicts or not try to send notification to the user via slack
+ 
+ CI: 
+
+
+  ---practical session---
+
+
+06/01/2026: Build Automation:
+=============================
+What is build: 
+--------------
+ is a set of executable source code generated after compilation.
+  20 devlopers -- 20 pieces as files --- integration --one final piece 
+
+ build process: converting source code in to runnable , deployable as artifacts.
+
+
+
+build format:
+=============
+ language -- code -- java ---> jar/war/ear/image 
+             code -- .net ---> dll 
+
+
+without build what happens:
+---------------------------
+
+ 
+why do we need build: 
+---------------------
+ consistency 
+ repetability
+ traceability 
+ 
+ 
+Types of builds:
+----------------
+ nightly build 
+ ---------------
+  patch build: bug fix /security 
+  hotfix build 
+  release build 
+  Development build 
+
+
+How th builds are trigger: 
+---------------------------
+ Manual build 
+ automated build : --CI-SERVER-JENKINS 
+ Scheduled: -- pull 
+ Event-driven build: push,PR,merge 
+ 
+Based on architecture:
+----------------------
+ monolithic
+ microservice
+ serverless 
+ 
+ node.jjs: .tgz,buldle 
+ python: .whl, tar.gz
+ go:   binary 
+ docker: --image 
+ k8s: helm chart 
+ 
+ front end: --- static assets 
+
+Build Automation:
+-------------------
+ build tools: 
+ ------------- 
+  used to automate the build process 
+  
+  Java: --> maven, gradle 
+  node.js: --> npm,yarn,pnpm 
+  .Net : msbuild 
+  python: poetry 
+  go --go build 
+  
+  
+07/01/2026: Application Engineering 
+====================================
+working for the applications/environments/schedules/deliveries/client not for the tools
+
+ *design
+ *build
+ *structured
+ *configured
+ *deployed
+ *reliable
+ *scalable
+ *testable
+ *automated under diff environment
+
+health/logs/metrics
+
+
+Key reasons start at application engineering:
+----------------------------------------------
+ 1. Security starts at application configurations 
+ 2. Weak app design 
+ 3. CI/CD pipelines operated on applications not tools 
+ 4. maven+docker -- image 
+ 
+What to focus in application:
+------------------------------
+ Application fundamentals:
+  language & runtime 
+  entry point 
+  build system 
+  
+Application life cycle:
+-----------------------
+  startup   # init - like initalize pre service before start the main service 
+  shutdown behavior 
+  failure modes 
+  retry logic 
+  graceful termination
+  
+Configuration model:
+---------------------
+ environment variables
+ config files 
+ .kube/ configuration module
+ secret handling 
+ runtime overrides 
+ 
+Dependency model:
+-----------------
+ Database 
+ external service 
+ caches
+ message brokers
+ 
+Observability:
+--------------
+ logs 
+ metrics 
+ health checks 
+ error handling
+
+1. Application structure and design 
+------------------------------------
+ 1. Know the application entry points : -spring boot, node index.js, main 
+   * understand how the app stops 
+ 2. build and packing 
+ 
+ 
+ 
+07/01/2026: Introduction to Maven
+===================================
+what is maven: 
+-------------- 
+ is a build tool 
+ used to automate the build process  
+ is written in java 
+ platform independent 
+ platfom: OS+Processor 
+ opensource 
+ follows the conventions rather than configuration
+ 
+ require a build file: ---xml based 
+ build file:--> pom.xml 
+ what is pom --> project object model 
+  used for project management purpose  
+  used for reporting 
+  
+ have its own predefined life cycle 
+ defines the order of exxecution 
+ supports the order of lifecycyles 
+  default 
+  clean 
+  site 
+  
+ *lifecycle -- phase -->plugins --> goals
+ *Dependency management tool 
+ Repository : local, remote, central repo: mvnreposotory.cm
+ build cache 
+ portability of the build  
+
+ dev/qa/uat/sit  -profiles
+ maven with +CI SERVER tools
+ maven+git+svn+codecommit+azurerepo
+ maven+docker+ansible+k8s+
+ maven cli ->mvn
+ maven+multiple server
+ can do deployment, undepployment , rdeployment
+ 
+ maven proper project tree structure
+
+ Java architecture 
+ 
+ 
+09/01/2026: Maven - regular terms used in DevOps
+==================================================
+CI-Server 
+---------- 
+ Jenkins 
+ GitLab ----> Build file ---Java--> pom.xml
+ githubactions 
+ azuredevops 
+ pom -->Project object model 
+ build automation 
+ dependency management 
+ 
+Maven:
+-----
+
+build tool:
+-----------
+order of build execution
+3 life cycles :---- default/clean/site
+
+artifacts ---- final output ----- > jar/war/ear/image
+
+what is dependency: 
+------------------- 
+ software dependency 
+  xml elements  --- gav properties  #group ID ,srtifact ID, version 
+  
+dependency managemnnt
+---------------------
+
+artifact 
+---------
+ output ---->war/ear/image/jar 
+ artifactID+code----  /op ----- artifacts -- jar
+
+version:
+--------- 
+ 1. snapshot 
+ 2. release 
+ 
+snapshot: 
+---------- 
+ development version ---still changing, not final 
+ 
+release:
+----------
+ stable and production -ready version 
+ 
+packaging:
+-----------
+ format of artifact --output 
+ 
+what is pom.xml:
+---------------
+ pom.xml 
+ 
+ build file/maven configuration file 
+ 
+repository :
+------------
+ storage location for artifacts and dependencies
+ 
+ 
+nexus/jfrog
+image --- dockerhub/ecr/acr/
+
+local repository:
+-------------------:
+
+~/.m2/repository
+
+remote repository:
+------------------------:
+
+custom repository hosted inside the company/organization
+
+     nexus/jfrog-artifacttory/dockerhub/ecr/acr
+
+
+build lifecycle:
+-----------------
+
+lifecycle --- phases ----- plug-ins --- goals
+
+phases :
+-----------:
+
+collections of predefined steps that will help to maintain the order of build execution
+
+   default:---23 
+   site:
+   clean
+
+plug-in:
+----------
+ extension to maven used to perform task 
+ 
+
+Maven configration: 
+-------------------
+ cd opt/
+ yum git  -y 
+ git clone ------  #
+ mvn validate 
+ mvn compile 
+ mvn test 
+ mvn package 
+ 
+buiod ssection
+---------------
+ 
+what is dependency tree: 
+-------------------------
+  
+what is metadata:
+----------------
+ version 
+ packages 
+ checksums
+ 
+ 
+--pending 
+
+
+
+
+========================================
+10/01/2026: what is archetype in maven 
+=======================================
+ it is a project templete generator
+ create a project with predefined structure, filels, directories and configurations 
+ 
+ understand the application architype
+ -------------------------------------
+  desktop application 
+  microservices 
+  web application 
+  enter-prise
+  
+ when run the archetype , maven creates 
+  - src/main/java ----------> development code 
+    src/main/resources 
+	src/test/java   --------> testing code: ----> UNIT Testcases/IT 
+	
+why maven Introduced Archetype:
+--------------------------------
+ Project consistency 
+ reproducibility 
+ standards 
+ faster project bootstrapping 
+ 
+how many types of archetypes: 
+------------------------------
+ 1. official maven archetype 
+ 2. framework specific archetypes 
+     spring boot 
+	 micronut
+	 camel 
+	 quarkus 
+	 Jakarta EE
+ 3. coustom corporate archetype 
+ 
+Why devops engineers need to know archetype: 
+----------------------------------------------
+ Must understand project standards --CI/CD 
+ 
+ Automation at scale 
+ 
+ devops must creates organization templetes 
+   microservices templetes 
+   testing templete
+   docker templete 
+   CI/CD 
+   k8s deployment 
+   
+ enables the GITOPS + Platform engineering 
+ 
+ archetype + helm + k8s + argocd 
+ security and complience 
+ dependency management 
+ dependency analysis
+ 
+
+
+==========================================
+12/01/2026: what is acrchetype in maven
+=========================================
+Project templete --- create structure 
+dev---push the code ---github --integrate in to CI Server --- run the CI pipeline --checkout the code 
+---> verify the code is having proper mandate files or not -- build file--pom
+
+ mvn archtype:generate -DgroupId=com.srini.eapp -DartifactId
+
+ validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile,
+process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources,
+test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test,
+post-integration-test, verify, install, deploy
+
+
+what is source:
+----------------
+ all java releate files that need to compiled in to byte code--.class --
+ build = collection of .class 
+ 
+ what are resource in maven:
+ ---------------------------- 
+ non-java files needed by the application during the runtime 
+ 
+ 
+ 
+ 
+19/01/2026: Introduction to pom.xml:
+===================================== 
+ it is a build file 
+ is a configuration file 
+ dependencies 
+ build plugings 
+ 
+ project versions: major.minor.patch 
+                 : major.minor.build 
+				 :major.minor.hotfix 
+ repository details: 
+   :snapshot repositories 
+   :release repositories 
+   
+ profiles: build profiles 
+ ci/cd integration 
+ servers:tomcat/weblogic/websphere/jboss
+  
+ Webapplication
+  enterprise: ----------> multi-module integration 
+  
+  package: jar/war/ear 
+  codecoverage plug-in : cobertura/pmd/checkstyle/jacoco/jxr 
+  
+  sast: -- sonarQube
+  
+ test result
+ distrubution management
+ binary artifactory integration: Jfrog /nexus 
+ 
+ mvn install 
+ mvn deploy 
+ 
+ maven+docker  --->image -- push the images -- dockerhub
+pom. xml ---> docker plug-ins :--- mvn docer:build
+war
+
+maven+github/bitbucket 
+release management 
+
+  
+ Three TYPES OF pom: Project Object Modle
+-------------------------------------
+
+ 1. Parent pom:  aggregator POM     #widely used in microservice architecture 
+     
+	 
+     multi-modules 
+     microservices 
+     ci/cd build orchestration 
+     
+     service 1: ---------jar+pom 
+     s2 : -----------------jar 
+     s3 : ----------------jar 
+     
+     **should know how to deploy monolithic and micro dervices application ****
+
+ 2. child pom:
+ -------------
+ 
+ 
+ 3.super pom:
+ -----------
+  maven build on top of apache
+  
+  apache --- convention   ---implicit ---- super pom 
+ 
+ 
+  ==========================
+   POM Elements
+   ---------------------------
+    * Project info
+    * maven coordinates 
+    * versions 
+    * packages 
+    * dependencies 
+    * distributed management [nexus or jfrog]
+    * plug-ins 
+    * repositories 
+    * profiles 
+    * sast 
+    * deployment automation 
+    * source code management integration 
+    * multi-modules 
+   ---------------------------------------
+   
+ * whith in pom.xml - 2 plugins 
+ ------------------------------
+   build plug-ins 
+   reporting plug-ins 
+   
+-complpete 
+ 
+ 
+20/01/2026: Deploying sample hello-world application in to tomcat using pom.xml 
+===============================================
+
+ launch virtual server :---- ec2-redhat/amazon
+ login as root user: sudo su -
+ move to opt directory: cd /opt
+ install and configure java:
+   JDK: JAVA DEVELOPMENT KIT
+        JAVAC ---COMPILE the code ---.class ---Bytecode
+   JRE: JAVA RUNTIME ENVIRONMENT --- JVM---.Classs
+ 
+ CI --Apps --JavaBased 
+ 
+ compile -->mvn compile -->main and test code -->java compiler -->.class (byte code) ---> JRE 
+
+
+
+ sudo su
+ cd /opt 
+ yum install -y java-17*
+ java -version 
+ find /usr/lib/jvm/java-17* | head -n 3
+ vi ~/.bash_profile
+    JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.50.amzn1.x86_64
+ wget https://dlcdn.apache.org/maven/maven-3/3.9.12/binaries/apache-maven-3.9.12-bin.tar.gz
+ ls 
+ tar -xzvf apache-maven-3.9.12-bin.tar.gz   #(tar -tape archieves and gz - gunzip)
+ mv apache-maven-3.9.12/ maven 
+  #adding mavn home path 
+ vi ~/.bash_profile
+   M2_HOME=/opt/maven
+   M2=/opt/maven/bin
+   PATH=$PATH:$HOME/bin:$JAVA_HOME:$M2:$M2_HOME
+
+    export PATH
+ source ~/.bash_profile  #source -to make the changes permanent
+ java -version 
+ mvn --version   (maven supports archetype)
+ mvn archetype:generate -DgroupId=com.pro.app -DartifactId=webpro -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+ 
+        [root@ip-172-31-16-250 opt]# ls
+       aws  maven  webpro
+       [root@ip-172-31-16-250 opt]# cd webpro/
+       [root@ip-172-31-16-250 webpro]# ls
+       pom.xml  src
+       [root@ip-172-31-16-250 webpro]# cd src/
+       [root@ip-172-31-16-250 src]# ls
+       main
+       [root@ip-172-31-16-250 src]# cd main/
+       [root@ip-172-31-16-250 main]# ls
+       resources  webapp
+       [root@ip-172-31-16-250 main]# cd webapp/
+       [root@ip-172-31-16-250 webapp]# ls
+       WEB-INF  index.jsp
+       [root@ip-172-31-16-250 webapp]#
+
+ cd webpro/   #pom.xml should exist 
+ mvn package  #webpro.war will be create
+
+#instaling apache-tomcat
+------------------- 
+ wget https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.93/bin/apache-tomcat-7.0.93.tar.gz
+ tar -xzvf  apache-tomcat (x-extract z-folder v-verbose on screen f-all files)
+ cd /opt/tomcat/conf/   #tom cat credentials and other important files are stored
+ 
+ 
+ Difference btw Monolithic and Microservices 
+  Monolithic  - Everything Manuall
+  Microservices  - some of comes with build in 
+  
+ current action 
+  mnv package --> war (web archive(collection of .class files )) --> can access application by --> place war in Web server (tomcat )
+ 
+ Time: 1.0.0.18
+ 
+ 
+ 
+21/01/2026: Introduction to Build profiles in Maven:
+=====================================================
+
+ *build profile is a xml element in pom.xml 
+  application need to deploy for different environment 
+  to achieve build portability 
+  to customize 
+    jvm args 
+    plug-in config 
+    dependencies 
+    resource filtering 
+    build properties 
+    environment variables 
+    output directory 
+  to change the build behaviour 
+   UAT --->
+   QA ---> 
+   prod --> 
+   
+   
+  * acheive 0 manual switchich to profiles 
+  
+  types:
+   pom.xml
+   setting.xml 
+   
+what are the diff activation types:
+------------------------------------
+
+
+22/1/2026:
+============
+
+dependency management
+-----------------------
+ Process of 
+          declaring 
+		  downloading
+		  versioningorganize
+		  maintain the libraries
+		  
+ spring-boot:
+ --------------
+    MySQL driver 
+	
+	
+	
+dependency analysis
+depdency resolution
+types of dependencies
+what is dependency scope
+what are the diff steps involved to handle dependencies
+
+*integration of testcase execution using jun
+ importance of sast,owasp dependency analysis
+*code-coverage and code quality
+
+*analysis of test reports
+	
+ 
+ 
 

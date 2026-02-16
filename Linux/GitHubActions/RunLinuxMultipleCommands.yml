@@ -1,0 +1,13 @@
+name: Run Linux Commands
+on: push
+jobs:
+  shell-job:
+     runs-on: ubuntu-latest
+     steps:
+       - name: Run commands
+         run: |                    #| - pipe symbol, Allows multi-;ine shell commands
+                echo "welcome to github-action"
+                pwd
+                whoami
+                echo "list some files"
+                ls

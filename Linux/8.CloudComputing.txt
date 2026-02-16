@@ -1,0 +1,221 @@
+what is cloud computing
+------------------------
+
+servers ---- VM
+storage
+databases
+networking
+software
+security
+analytics
+
+why we need
+------------
+ atleast master 10 service 
+ cost optimization 
+ scalability and elasticity
+ speed and agility 
+ ci/cd 
+ 
+ **High Availability, DR, Recovery, Backup 
+ 
+ Security
+ DevOps and automation
+
+what is cloud computing Environment
+
+what are the diff services in the cloud:
+----------------------------------------
+
+*IAAS
+-------
+   Physical server 
+   virtual machines 
+   disk 
+   networks 
+   security 
+   
+you manage: 
+-----------
+ OS
+ middle ware
+ application maintanance
+ data
+ security 
+ 
+ IAAS 
+ 
+ 
+*PAAS
+-------
+Runtime 
+ # Compute, runtime environment
+ 
+*SAAS
+-----
+ #everything will be there. eg: google drive, zoom, slack
+   
+   
+   
+what are the various cloud models:
+----------------------------------
+   *public : aws/azure/gcp
+   *private: Data centre 
+   *hybrid: private + public
+
+IAAS: --> LinuxAdmin/Windows server --high
+PAAS: --> Low 
+SAAS: --> Almost None    
+
+
+CLOUD ENGINEER:
+----------------
+
+ *AWS/AZURE/GCP SERVICES
+ 
+*DEVOPS
+--------
+  CC+CB+CD+CP+CLOUDWATCH+ECS+ECR+EKS
+  
+*SRE:
+  ticket, cloud, monitoring, alert, devops 
+  
+cloud Architect
+cloud security / DevSecops Engineer 
+Cloud Administrator
+platform engineer
+cloud consultant/finops 
+
+
+what are the diff roles in cloud computing:
+
+*what are the various cloud account in the real worldI
+
+Introduct: Security/identity/compliance:
+IAM
+
+
+Service:
+---------
+IAM is WebService
+
+Identity  --- Authenitication
+Access   ---- Authorization
+Management -- Audit
+
+AAA
+
+IAM IS WEBSERVICE
+RES
+
+
+07/02/2026: IAM
+***************
+
+Ways can interact with aws
+-------------------------
+management console
+aws-cli
+aws-cdk
+aws - sdk  ----------access -keys/secret keys
+API
+CFT
+Terraform
+
+RESTAPI
+API 
+WEBSERVICE
+
+
+IAM:
+***
+
+is a global services
+I -- identity------------>who are you ---- Authenitication
+A -- Access  ----what can you do --- Authorization
+M -- Management
+
+*manages the users and permissions
+
+by default IAM users have ZERO permissions
+
+users/groups/roles/policies
+
+* IAM user :---- HAS unique credentials
+*IAM GROUP
+
+*IAm USERS DO NOT INHERIT ROOT PRIVILEGES
+root user
+iam user
+
+*access-keys
+
+USERS CAN BE HUMAN or service/application
+should have least previlage 
+
+**data representation language/format 
+ XML
+ Json --Java Script object notation
+ yaml - CI/CD 
+ 
+ 
+*Policy : --managed ,coustom policy,inline policy
+
+IAM Role:
+********
+
+are used to grant temporary permissions
+
+on-premise--cloud
+*iam supports authentication with SAML, AD, COGNITO, OIDC, LDAP
+
+*FEDERATED USERS NEVER BECOME IAM USERS-THEY MUST GET temporary access
+STS-SECURE TOKEN SERVICE
+ 
+
+08/02/2026: What is policy 
+=========================== 
+is a JSON dicument 
+defines the permission 
+  Who can do something ? ---- access 
+  
+  
+policy document:
+================
+1) version
+2) Effect: --- Allow/deny
+3) action
+4) resource
+5) condiiton
+
+types of IAM policies:
+====================== 
+1)identity based policies
+users/groups/roles
+
+2)resource-based policies
+
+3) Inline policies
+
+4) Managed policies
+
+}
+"Version": "2012-10-17",
+"Statement": [
+
+"*"
+
+"Sid": "AllowEc2LaunchFromApprovedRegionAZ",
+"Effect": "Allow",
+"Action": [
+
+"ec2: RunInstances",
+"ec2:CreateTags"
+],
+"Resources":
+"Condition": {
+"StringEquals": {
+"aws : RequestedRegion"  
+
+
+
